@@ -7,9 +7,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    
+    private static Stage stg;
+
     @Override
     public void start(Stage PrimaryStage) throws Exception{
+        stg = PrimaryStage;
+        PrimaryStage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("Login_form.fxml"));
         PrimaryStage.setTitle("UOW room booking system");
         PrimaryStage.setScene(new Scene(root, 600, 400));
