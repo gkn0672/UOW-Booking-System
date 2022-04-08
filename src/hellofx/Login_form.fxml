@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0000;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0000;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofx.Login">
    <top>
       <AnchorPane prefHeight="153.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -35,7 +35,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="Login" layoutX="171.0" layoutY="86.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="280.0" style="-fx-background-color: #0F52BA;" text="Log in" textFill="WHITE">
+            <Button fx:id="Lgnbutton" layoutX="171.0" layoutY="86.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="26.0" prefWidth="280.0" style="-fx-background-color: #0F52BA;" text="Log in" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
