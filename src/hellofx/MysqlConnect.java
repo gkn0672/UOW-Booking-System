@@ -5,7 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class MysqlConnect {
-    private Connection conn;
+    public static Connection conn;
     static String template = "jdbc:mysql://localhost/%s?useEncoding=true&characterEncoding=UTF-8&user=%s&password=%s";
 
     //Default constructor
@@ -14,6 +14,10 @@ public class MysqlConnect {
         connect(database, user, password);
     }
 
+    public Connection getConnection(){
+        return conn;
+    }
+    
     //Establish connection
     public void connect(String database, String user, String password) {
         try {
@@ -32,11 +36,4 @@ public class MysqlConnect {
             System.exit(0);
         }
     }
-/*
-    public void insert(){
-
-    }
-
-    public void 
-    */
 }

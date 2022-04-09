@@ -19,7 +19,7 @@
                   <Image url="@uow_logo.png" />
                </image>
             </ImageView>
-            <Label fx:id="LoginError" layoutX="294.0" layoutY="198.0" prefWidth="11.0" textFill="RED">
+            <Label fx:id="LoginError" alignment="CENTER" layoutX="173.0" layoutY="137.0" prefHeight="24.0" prefWidth="280.0" style="-fx-background-color: f7dddc;" textAlignment="CENTER" visible="false">
                <font>
                   <Font size="14.0" />
                </font>
@@ -40,13 +40,23 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <PasswordField fx:id="Password" layoutX="300.0" layoutY="43.0" />
+            <PasswordField fx:id="Password" layoutX="300.0" layoutY="43.0" onAction="#userLogin" />
             <Label fx:id="username" layoutX="171.0" layoutY="-1.0" text="Username" textFill="#001641">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
             <TextField fx:id="Username" layoutX="300.0" layoutY="1.0" promptText="Username" />
+            <Label fx:id="Usernamemissing" layoutX="454.0" layoutY="3.0" text="*" textFill="RED" visible="false">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="Passwordmissing" layoutX="454.0" layoutY="45.0" text="*" textFill="RED" visible="false">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>
