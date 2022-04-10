@@ -32,15 +32,37 @@ public class Main extends Application {
         PrimaryStage.setScene(new Scene(root, 600, 400));
         PrimaryStage.show();
     }
-    
+
     //Change the scene
-    public void createScene(FXMLLoader loader) throws IOException{
-        Scene sc = new Scene(loader.load(), 1280, 720);
-        stg.setResizable(false);
-        stg.setY(50);
-        stg.setX(200);
-        stg.setScene(sc);
-        stg.show();
+    public void createScene(FXMLLoader loader, String title, double width, double length, double x, double y) throws IOException{
+        try{
+            Scene sc = new Scene(loader.load(), width, length);
+            stg.setTitle(title);
+            stg.setResizable(false);
+            stg.setY(y);
+            stg.setX(x);
+            stg.setScene(sc);
+            stg.show();
+        }
+        catch(IOException e){
+            System.out.println("Error when loading the scene");
+        }
+    }
+
+    public void popup(FXMLLoader loader, String title, double width, double length, double x, double y) throws IOException{
+        try{
+            Stage stage = new Stage();
+            Scene sc = new Scene(loader.load(), width, length);
+            stage.setTitle(title);
+            stage.setResizable(false);
+            stage.setY(y);
+            stage.setX(x);
+            stage.setScene(sc);
+            stage.show();
+        }
+        catch (IOException e){
+            System.out.println("Error when load pop up window");
+        }
     }
 
     //Main method

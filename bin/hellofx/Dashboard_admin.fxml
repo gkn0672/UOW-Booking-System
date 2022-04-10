@@ -1,24 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="Welcome" alignment="CENTER" layoutX="38.0" layoutY="14.0" text="Welcome, ####!" textAlignment="CENTER">
+            <Label fx:id="Welcome" alignment="CENTER" layoutX="36.0" layoutY="200.0" text="Welcome, ####!" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font></Label>
-            <Label fx:id="Role" layoutX="43.0" layoutY="63.0" text="Your role: ####">
+            <Label fx:id="Role" layoutX="39.0" layoutY="226.0" text="Your role: ####" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
+            <ImageView fitHeight="200.0" fitWidth="200.0">
+               <image>
+                  <Image url="@UOW_logo_staff.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="Logoutbutton" layoutX="31.0" layoutY="532.0" mnemonicParsing="false" onAction="#Adlogout" prefHeight="26.0" prefWidth="134.0" text="Log out" />
          </children>
       </AnchorPane>
    </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView layoutX="341.0" layoutY="54.0" prefHeight="490.0" prefWidth="738.0" AnchorPane.bottomAnchor="55.60000000000002" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <Label alignment="CENTER" layoutX="341.0" layoutY="14.0" prefHeight="18.0" prefWidth="739.0" text="Room list" textAlignment="CENTER" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Button fx:id="Createbutton" layoutX="194.0" layoutY="220.0" mnemonicParsing="false" onAction="#Createroom" prefHeight="26.0" prefWidth="111.0" text="Create room" />
+            <Button layoutX="194.0" layoutY="300.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0" text="Modify room" />
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>

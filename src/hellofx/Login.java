@@ -57,13 +57,13 @@ public class Login {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard_admin.fxml"));
                         Admin acontroller = new Admin(Username.getText(), role);  
                         loader.setController(acontroller);
-                        m.createScene(loader);
+                        m.createScene(loader, "UOW dashboard (staff version)", 1280, 600, 200, 50);
                     }
                     else{
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard_student.fxml"));
                         Student scontroller = new Student(Username.getText(), role);  
                         loader.setController(scontroller);
-                        m.createScene(loader);
+                        m.createScene(loader, "UOW dashboard (student version)", 1280, 600, 200, 50);
                     }
 
                 }else{
