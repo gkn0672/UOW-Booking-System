@@ -7,12 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class Main extends Application {
     private static Stage stg;
     private static MysqlConnect c1;
 
+    //Get connection to mysql server
     public MysqlConnect getC(){
         return c1;
     }
@@ -46,9 +48,11 @@ public class Main extends Application {
         }
         catch(IOException e){
             System.out.println("Error when loading the scene");
+            System.out.println(e.getMessage());
         }
     }
 
+    //Create pop up window
     public void popup(FXMLLoader loader, String title, double width, double length, double x, double y) throws IOException{
         try{
             Stage stage = new Stage();
@@ -58,14 +62,16 @@ public class Main extends Application {
             stage.setY(y);
             stage.setX(x);
             stage.setScene(sc);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
         }
         catch (IOException e){
             System.out.println("Error when load pop up window");
+            System.out.println(e.getMessage());
         }
     }
 
-    //Main method
+    //Main method (only for launching)
     public static void main(String[] args){
         launch(args);
     }

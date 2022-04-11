@@ -15,6 +15,7 @@ public class Student implements Initializable{
     private String username;
     private String role;
 
+    //Constructor
     public Student(String username, String role){
         this.username = username;
         this.role = role;
@@ -24,13 +25,14 @@ public class Student implements Initializable{
     @FXML Label Srole;
     @FXML Button Lgnoutbutton;
 
-    
+    //Welcome menu when log in
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         Susername.setText("Welcome, "+username+" !");
         Srole.setText("UOW "+role);
     }
 
+    //Log out
     public void Stulogout(ActionEvent event) throws IOException{
         Main m = new Main();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login_form.fxml"));

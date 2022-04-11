@@ -26,7 +26,7 @@
             <Button fx:id="Lgnoutbutton" layoutX="26.0" layoutY="529.0" mnemonicParsing="false" onAction="#Stulogout" prefHeight="26.0" prefWidth="148.0" style="-fx-background-color: #0F52BA;" text="Log Out" textFill="WHITE" />
             <ImageView fitHeight="200.0" fitWidth="140.0" layoutX="30.0">
                <image>
-                  <Image url="@UOW_original.png" />
+                  <Image url="@Image/UOW_original.png" />
                </image>
             </ImageView>
          </children>
