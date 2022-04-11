@@ -1,6 +1,7 @@
 package hellofx;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 public class Admin implements Initializable{
     private String username;
     private String role;
+    protected Connection con;
 
     //Constructor
     public Admin(String username, String role){
@@ -70,7 +72,7 @@ public class Admin implements Initializable{
     public void createroom() throws Exception{
         Main m = new Main();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Create_room_form.fxml"));
-        Add_new_room adr1 = new Add_new_room(this.username, this.role);
+        Add_new_room adr1 = new Add_new_room(this.username, this.role, m);
         loader.setController(adr1);
         m.popup(loader, "Create room", 395, 508, 450, 150);
     }
@@ -79,7 +81,7 @@ public class Admin implements Initializable{
     public void createpromo() throws Exception{
         Main m = new Main();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Create_promo_code.fxml"));
-        Add_new_promo_code adrpc1 = new Add_new_promo_code(this.username, this.role);
+        Add_new_promo_code adrpc1 = new Add_new_promo_code(this.username, this.role, m);
         loader.setController(adrpc1);
         m.popup(loader, "Create promocode", 373, 453, 450, 150);
     }

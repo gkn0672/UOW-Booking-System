@@ -19,6 +19,10 @@ public class Main extends Application {
         return c1;
     }
 
+    public Stage getStage(){
+        return stg;
+    }
+    
     @Override
     //Show Login form
     public void start(Stage PrimaryStage) throws Exception{      

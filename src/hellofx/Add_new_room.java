@@ -12,8 +12,10 @@ import javafx.scene.control.ComboBox;
 
 public class Add_new_room  extends Admin {
     ObservableList<String> Blknumber = FXCollections.observableArrayList("A", "B", "C");
-    public Add_new_room(String username, String role){
+    private Main m;
+    public Add_new_room(String username, String role, Main m){
         super(username, role);
+        this.m = m;
     }
 
     @FXML Button Confirmcreate;

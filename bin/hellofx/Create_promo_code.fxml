@@ -41,8 +41,18 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="187.0" layoutY="48.0" promptText="e.g uow123, ..." />
-            <TextField layoutX="187.0" layoutY="148.0" promptText="Enter a number" />
+            <TextField fx:id="Codename" layoutX="187.0" layoutY="48.0" promptText="e.g uow123, ..." />
+            <TextField fx:id="Codevalue" layoutX="187.0" layoutY="148.0" promptText="Enter a number" />
+            <Label fx:id="Promoerror" layoutX="187.0" layoutY="78.0" prefHeight="18.0" prefWidth="149.0" text="error" textFill="RED" visible="false">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="Valueerror" layoutX="187.0" layoutY="184.0" prefHeight="18.0" prefWidth="150.0" text="Value!" textFill="RED" visible="false">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
    </center>
 </BorderPane>
