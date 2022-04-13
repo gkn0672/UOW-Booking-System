@@ -68,6 +68,7 @@ public class Admin implements Initializable{
         Welcome.setText("Welcome, "+username+" !");
         Role.setText("UOW "+role);
         updatePromo();
+        Editpromo.setDisable(true);
     }
 
     public void updatePromo(){
@@ -134,7 +135,7 @@ public class Admin implements Initializable{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Create_room_form.fxml"));
         Add_new_room adr1 = new Add_new_room(this.username, this.role, m);
         loader.setController(adr1);
-        m.popup(loader, "Create room", 395, 508, 450, 150);
+        m.popup(loader, "Create room", 395, 508, 650, 150);
     }
     
     //Promo selected
@@ -146,15 +147,16 @@ public class Admin implements Initializable{
         }
         Promonameselected.setText(col_promoname.getCellData(index).toString()); 
         Promovalueselected.setText(col_promovalue.getCellData(index).toString());
+        Editpromo.setDisable(false);
     }
 
     //Create new editpromo form
     public void editpromo() throws Exception{
         Main m = new Main();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Edit_promo.fxml"));
-        Edit_promo ed1 = new Edit_promo(Promonameselected.getText(), Integer.parseInt(Promovalueselected.getText()), this);
+        Edit_promo ed1 = new Edit_promo(Promonameselected.getText(), Integer.parseInt(Promovalueselected.getText()), this, m);
         loader.setController(ed1);
-        m.popup(loader, "Edit promocode", 394, 330, 450, 150);
+        m.popup(loader, "Edit promocode", 394, 330, 650, 150);
     }
 
     //Create new promocode form
@@ -163,6 +165,6 @@ public class Admin implements Initializable{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Create_promo_code.fxml"));
         Add_new_promo_code adrpc1 = new Add_new_promo_code(this.username, this.role, m, this);
         loader.setController(adrpc1);
-        m.popup(loader, "Create promocode", 373, 453, 450, 150);
+        m.popup(loader, "Create promocode", 373, 453, 650, 150);
     }
 }

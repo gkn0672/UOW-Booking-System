@@ -59,7 +59,7 @@ public class Add_new_promo_code extends Admin {
             Resultset rs = (Resultset) ps.executeQuery();
 
             if(((ResultSet) rs).next()){
-                Promoerror.setText("Promotioncode already exist");
+                Promoerror.setText("Promotion code already exist");
                 Promoerror.setVisible(true);
             }
             if(Codevalue.getText() == ""){
@@ -72,6 +72,7 @@ public class Add_new_promo_code extends Admin {
                 ps.setString(2, Codevalue.getText());
 
                 if(ps.executeUpdate() != 0){
+                    cancel(Cancelpromobutton);
                     Main m = new Main();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Success_message.fxml"));
                     Success_message sm1 = new Success_message("Promotion code added");

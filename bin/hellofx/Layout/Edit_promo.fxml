@@ -33,16 +33,32 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="Updatepromo" layoutX="156.0" layoutY="225.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" text="Update" />
-            <Label alignment="CENTER" layoutX="17.0" layoutY="116.0" prefHeight="18.0" prefWidth="106.0" text="New value">
+            <Button fx:id="Updatepromo" layoutX="156.0" layoutY="225.0" mnemonicParsing="false" onAction="#EUpdate" prefHeight="31.0" prefWidth="82.0" text="Update" />
+            <Label alignment="CENTER" layoutX="17.0" layoutY="93.0" prefHeight="18.0" prefWidth="106.0" text="New value">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
             <TextField fx:id="Editcodename" layoutX="164.0" layoutY="28.0" />
-            <TextField fx:id="Editcodevalue" layoutX="164.0" layoutY="117.0" />
-            <Button fx:id="Deletepromo" layoutX="272.0" layoutY="225.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" text="Delete" />
+            <TextField fx:id="Editcodevalue" layoutX="164.0" layoutY="94.0" />
+            <Button fx:id="Deletepromo" layoutX="272.0" layoutY="225.0" mnemonicParsing="false" onAction="#EDelete" prefHeight="31.0" prefWidth="82.0" text="Delete" />
             <Button fx:id="Cancel" layoutX="40.0" layoutY="225.0" mnemonicParsing="false" onAction="#ECancel" prefHeight="31.0" prefWidth="82.0" text="Cancel" />
+            <Label fx:id="Editerror" alignment="CENTER" layoutX="164.0" layoutY="62.0" prefHeight="18.0" prefWidth="150.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="18.0" layoutY="159.0" prefHeight="27.0" prefWidth="126.0" text="Delete this?">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Deleteconfirm" layoutX="164.0" layoutY="160.0" onKeyReleased="#Deletecheck" onMouseClicked="#Deletewarnshow" />
+            <Label fx:id="Deletewarn" alignment="CENTER" layoutX="146.0" layoutY="193.0" prefHeight="18.0" prefWidth="185.0" text="Please type &quot;Confirm&quot; to delete" textFill="RED" visible="false">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
    </center>
 </BorderPane>

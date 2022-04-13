@@ -45,8 +45,10 @@ public class Main extends Application {
             Scene sc = new Scene(loader.load(), width, length);
             stg.setTitle(title);
             stg.setResizable(false);
+
             stg.setY(y);
             stg.setX(x);
+
             stg.setScene(sc);
             stg.show();
         }
@@ -63,8 +65,10 @@ public class Main extends Application {
             Scene sc = new Scene(loader.load(), width, length);
             stage.setTitle(title);
             stage.setResizable(false);
+
             stage.setY(y);
             stage.setX(x);
+
             stage.setScene(sc);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
