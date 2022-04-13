@@ -6,10 +6,17 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "hellofx.Class.Main",
+            "projectName": "exit_7edcb4ea"
+        },
+        {
+            "type": "java",
             "name": "Launch App",
             "request": "launch",
             "mainClass": "hellofx.Main",
-            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-18/lib\" --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-18/lib\" --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }

@@ -35,7 +35,7 @@ public class Student implements Initializable{
     //Log out
     public void Stulogout(ActionEvent event) throws IOException{
         Main m = new Main();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login_form.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Login_form.fxml"));
         m.createScene(loader, "UOW room booking system", 600, 400, 450, 150);
     }
 }

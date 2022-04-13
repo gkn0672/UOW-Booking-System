@@ -54,17 +54,17 @@ public class Login {
                 ResultSet rs = ps.executeQuery();
                 if(rs.next()){
                     //Role
-                    String role = rs.getString(6);
+                    String role = rs.getString(5);
                     //If user is admin -> admin dashboard
                     if (role.equals("Staff") == true){
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard_admin.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Dashboard_admin.fxml"));
                         Admin acontroller = new Admin(Username.getText(), role);  
                         loader.setController(acontroller);
                         m.createScene(loader, "UOW dashboard (staff version)", 1280, 600, 200, 50);
                     }
                     //User is student -> student dashboard
                     else{
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard_student.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Dashboard_student.fxml"));
                         Student scontroller = new Student(Username.getText(), role);  
                         loader.setController(scontroller);
                         m.createScene(loader, "UOW dashboard (student version)", 1280, 600, 200, 50);

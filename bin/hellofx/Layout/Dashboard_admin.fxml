@@ -25,7 +25,7 @@
             </Label>
             <ImageView fitHeight="200.0" fitWidth="200.0">
                <image>
-                  <Image url="@Image/UOW_logo_staff.jpg" />
+                  <Image url="@../Image/UOW_logo_staff.jpg" />
                </image>
             </ImageView>
             <Button fx:id="Logoutbutton" layoutX="31.0" layoutY="532.0" mnemonicParsing="false" onAction="#Adlogout" prefHeight="26.0" prefWidth="134.0" text="Log out" />
@@ -55,17 +55,20 @@
             <Button fx:id="Createbutton" layoutX="428.0" layoutY="559.0" mnemonicParsing="false" onAction="#Createroom" prefHeight="26.0" prefWidth="111.0" text="Create room" />
             <Button layoutX="892.0" layoutY="559.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0" text="Modify room" />
             <Button fx:id="Createpromobutton" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#Createpromo" prefHeight="26.0" prefWidth="92.0" text="New Promo" />
-            <TableView layoutX="14.0" layoutY="54.0" prefHeight="486.0" prefWidth="200.0">
+            <TableView fx:id="table_promo" layoutX="14.0" layoutY="54.0" onMouseClicked="#getSelectedPromo" prefHeight="486.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="199.2000274658203" text="Code name" />
+                <TableColumn fx:id="col_promoname" prefWidth="97.59999084472656" text="Code name" />
+                  <TableColumn fx:id="col_promovalue" prefWidth="101.5999755859375" text="Value" />
               </columns>
             </TableView>
-            <Button layoutX="114.0" layoutY="559.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Edit" />
+            <Button fx:id="Editpromo" layoutX="114.0" layoutY="559.0" mnemonicParsing="false" onAction="#Editpromo" prefHeight="26.0" prefWidth="92.0" text="Edit" />
             <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="197.0" text="Promocode">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
+            <Label fx:id="Promonameselected" layoutX="251.0" layoutY="120.0" text="Label" visible="false" />
+            <Label fx:id="Promovalueselected" layoutX="251.0" layoutY="164.0" text="Label" visible="false" />
          </children>
       </AnchorPane>
    </center>

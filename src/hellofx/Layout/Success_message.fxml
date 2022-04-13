@@ -19,7 +19,7 @@
             </Label>
             <ImageView layoutX="21.0" layoutY="4.0">
                <image>
-                  <Image url="@Image/success-icon_32x32.png" />
+                  <Image url="@../Image/success-icon_32x32.png" />
                </image>
             </ImageView>
          </children></AnchorPane>

@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 import com.mysql.cj.protocol.Resultset;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,11 +14,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+
 public class Add_new_promo_code extends Admin {
     private Main m;
-    public Add_new_promo_code(String username, String role, Main m) {
+    private Admin ad;
+
+    public Add_new_promo_code(String username, String role, Main m, Admin ad) {
         super(username, role);
         this.m = m;
+        this.ad = ad;
     }
 
     @FXML Button Confirmpromobutton;
@@ -28,7 +31,7 @@ public class Add_new_promo_code extends Admin {
     @FXML TextField Codevalue;
     @FXML Label Promoerror;
     @FXML Label Valueerror;
-
+    
     @Override 
     public void initialize(URL arg0, ResourceBundle arg1) {
     }
@@ -64,17 +67,17 @@ public class Add_new_promo_code extends Admin {
                 Valueerror.setVisible(true);
             }
             else{
-                ps = con.prepareStatement("INSERT INTO `promotioncode`(`ID`, `Code_name`, `Code_sale`) VALUES (?, ?, ?)");
-                ps.setString(1, null);
-                ps.setString(2, Codename.getText().toUpperCase());
-                ps.setString(3, Codevalue.getText());
+                ps = con.prepareStatement("INSERT INTO promotioncode (`Code_name`, `Code_sale`) VALUES (?, ?)");
+                ps.setString(1, Codename.getText().toUpperCase());
+                ps.setString(2, Codevalue.getText());
 
                 if(ps.executeUpdate() != 0){
                     Main m = new Main();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Success_message.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Success_message.fxml"));
                     Success_message sm1 = new Success_message("Promotion code added");
                     loader.setController(sm1);
-                    m.popup(loader, "Success", 332, 194, 650, 250);     
+                    m.popup(loader, "Success", 332, 194, 650, 250);  
+                    ad.updatePromo();
                 }
                 else{
                     System.out.println("Update failed");

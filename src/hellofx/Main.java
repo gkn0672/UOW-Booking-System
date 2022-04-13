@@ -22,7 +22,7 @@ public class Main extends Application {
     public Stage getStage(){
         return stg;
     }
-    
+
     @Override
     //Show Login form
     public void start(Stage PrimaryStage) throws Exception{      
@@ -33,7 +33,7 @@ public class Main extends Application {
         //Login form settings
         stg = PrimaryStage;
         PrimaryStage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getResource("Login_form.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Layout/Login_form.fxml"));
         PrimaryStage.setTitle("UOW room booking system");
         PrimaryStage.setScene(new Scene(root, 600, 400));
         PrimaryStage.show();

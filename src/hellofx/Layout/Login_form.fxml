@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="254.0" fitWidth="254.0" layoutX="173.0" layoutY="43.0" preserveRatio="true" AnchorPane.bottomAnchor="60.36552429199219">
                <image>
-                  <Image url="@Image/uow_logo.png" />
+                  <Image url="@../Image/uow_logo.png" />
                </image>
             </ImageView>
             <Label fx:id="LoginError" alignment="CENTER" layoutX="173.0" layoutY="137.0" prefHeight="24.0" prefWidth="280.0" style="-fx-background-color: f7dddc;" textAlignment="CENTER" visible="false">
