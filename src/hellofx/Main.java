@@ -34,7 +34,7 @@ public class Main extends Application {
         stg = PrimaryStage;
         PrimaryStage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("Layout/Login_form.fxml"));
-        PrimaryStage.setTitle("UOW room booking system");
+        PrimaryStage.setTitle("UOW room booking system ver 1.0");
         PrimaryStage.setScene(new Scene(root, 600, 400));
         PrimaryStage.show();
     }
