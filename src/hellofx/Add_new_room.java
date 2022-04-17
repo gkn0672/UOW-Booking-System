@@ -38,9 +38,9 @@ public class Add_new_room  extends Admin {
 
     @FXML DatePicker Date;
 
-    @FXML TextField Hour;
+    @FXML LimitedTextField Hour = new LimitedTextField();
 
-    @FXML TextField Min;
+    @FXML LimitedTextField Min = new LimitedTextField();
 
     @FXML TextField Price;
 
@@ -56,6 +56,8 @@ public class Add_new_room  extends Admin {
         Blknum.setItems(Blknumber);
         
         Selectpromo.setItems(Promo);
+        Hour.TimerestrictHour();
+        Min.TimerestrictMin();
     }
 
     //Event trigger
