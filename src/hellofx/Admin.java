@@ -50,12 +50,27 @@ public class Admin implements Initializable{
 
     @FXML
     protected TableColumn<Promocode, String> col_promoname;
-
     @FXML
     protected TableColumn<Promocode, Integer> col_promovalue;
-
     @FXML
     protected TableView<Promocode> table_promo;
+
+    @FXML
+    private TableView<Room> Room;
+    @FXML
+    private TableColumn<Room, ?> Rprice;
+    @FXML
+    private TableColumn<Room, ?> Rpromo;
+    @FXML
+    private TableColumn<Room, ?> Rstatus;
+    @FXML
+    private TableColumn<Room, ?> Rtime;
+    @FXML
+    private TableColumn<Room, ?> Rcapacity;
+    @FXML
+    private TableColumn<Room, ?> Rdate;
+    @FXML
+    private TableColumn<Room, ?> Rname;
 
     ObservableList<Promocode> listP = FXCollections.observableArrayList();
     int index = -1;
@@ -133,7 +148,7 @@ public class Admin implements Initializable{
     public void createroom() throws Exception{
         Main m = new Main();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Create_room_form.fxml"));
-        Add_new_room adr1 = new Add_new_room(this.username, this.role, m);
+        Add_new_room adr1 = new Add_new_room(this.username, this.role, m, this);
         loader.setController(adr1);
         m.popup(loader, "Create room", 395, 508, 650, 150);
     }

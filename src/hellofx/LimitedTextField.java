@@ -13,26 +13,26 @@ public class LimitedTextField extends TextField {
 			"maxLength", -1);
 	private StringProperty restrict = new SimpleStringProperty(this, "restrict");
 
-	public LimitedTextField() {
+	public LimitedTextField() throws Exception{
 		textProperty().addListener(new ChangeListener<String>() {
 			private boolean ignore;
-
+	
 			@Override
 			public void changed(
 					ObservableValue<? extends String> observableValue,
 					String s, String s1) {
 				if (ignore || s1 == null)
 					return;
-
+	
 				if (maxLength.get() > -1 && s1.length() > maxLength.get()) {
 					ignore = true;
 				}
-
+	
 				if (restrict.get() != null && !restrict.get().equals("")
 						&& !s1.matches(restrict.get() + "*")) {
 					ignore = true;
 				}
-
+	
 				if (ignore == true){
 					setText(null);
 					ignore = false;
@@ -98,6 +98,7 @@ public class LimitedTextField extends TextField {
 	 * 
 	 *          The regular expression.
 	 */
+
 	public void setRestrict(String restrict) {
 		this.restrict.set(restrict);
 	}

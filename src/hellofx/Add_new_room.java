@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -24,30 +25,29 @@ public class Add_new_room  extends Admin {
     ObservableList<String> Promo = FXCollections.observableArrayList();
     private Main m;
     private LocalDate mydate;
-    public Add_new_room(String username, String role, Main m) throws Exception{
+    private Admin ad;
+    private String date;
+    private String time;
+    public Add_new_room(String username, String role, Main m, Admin ad) throws Exception{
         super(username, role);
         this.m = m;
+        this.ad = ad;
         initpromo();
     }
 
     @FXML Button Confirmcreate;
-
     @FXML Button Cancelbutton;
 
     @FXML ComboBox<String> Blknum;  
+    @FXML ComboBox<String> Selectpromo;
 
     @FXML DatePicker Date;
 
     @FXML LimitedTextField Hour = new LimitedTextField();
-
     @FXML LimitedTextField Min = new LimitedTextField();
 
     @FXML TextField Price;
-
     @FXML TextField Roomnumber;
-
-    @FXML ComboBox<String> Selectpromo;
-
     @FXML TextField Capacity;
     
     @Override
@@ -77,10 +77,50 @@ public class Add_new_room  extends Admin {
 
     public void confirmcreate() throws Exception{
         try{
+            Connection con = m.getC().getConnection();
+            PreparedStatement ps;
 
+            ps = con.prepareStatement("SELECT * FROM `room` WHERE `BlkNum` = ? AND `RoomNum` = ?");
+            ps.setString(1, Blknum.getValue());
+            ps.setString(2, Roomnumber.getText());
+            ResultSet rs = (ResultSet) ps.executeQuery();
+
+            if(((ResultSet)rs).next()){
+                System.out.println("Already exist");
+            }
+            else{
+                ps = con.prepareStatement("INSERT INTO room (`RoomNum`, `BlkNum`, `Status`, `Price`, `Capacity`, `Date`, `Time`, `Promo_code`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                ps.setString(1, Roomnumber.getText());
+                ps.setString(2, Blknum.getValue());
+                ps.setString(3, "Not available");
+                ps.setString(4, Price.getText());
+                ps.setString(5, Capacity.getText());
+                ps.setString(6, date);
+                gettime();
+                ps.setString(7, time);
+                if(Selectpromo.getValue() == null){
+                    ps.setString(8, null);
+                }
+                else{
+                    ps.setString(8, Selectpromo.getValue());
+                }
+
+                if(ps.executeUpdate() != 0){
+                    cancel(Cancelbutton);
+                    Main m = new Main();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Success_message.fxml"));
+                    Success_message sm1 = new Success_message("Room added");
+                    loader.setController(sm1);
+                    m.popup(loader, "Success", 332, 194, 650, 250);  
+                    ad.updatePromo();
+                }
+                else{
+                    System.out.println("Update failed");
+                }
+            }
         }
         catch(Exception e){
-            
+            System.out.println(e.getMessage());
         }
     }
 
@@ -99,11 +139,34 @@ public class Add_new_room  extends Admin {
     public void getdateformat() throws Exception{
         try{
             mydate = Date.getValue();
-            String date = mydate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            System.out.println(date);
+            date = mydate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+    }
+
+    //Get time format
+    public void gettime(){
+        int hour = Integer.parseInt(Hour.getText());
+        int minute = Integer.parseInt(Min.getText());
+        String finalhour;
+        String finalmin;
+
+        if (hour < 10){
+            finalhour = String.format("0%s", String.valueOf(hour));
+        }
+        else{
+            finalhour = String.format("%s", String.valueOf(hour));
+        }
+
+        if(minute < 10){
+            finalmin = String.format("0%s", String.valueOf(minute));
+        }
+        else{
+            finalmin = String.format("%s", String.valueOf(minute));
+        }
+
+        time = String.format("%s:%s:00", finalhour, finalmin);
     }
 }
