@@ -10,14 +10,14 @@ Create project file<br/>
 - Log in System<br/>
 
 ## [1.1] - 2022-04-13
-### Added<Staff>
+### Added - Staff
 - View promotion code list<br/>
 - Create new promotion code list<br/>
 - Modify exist promotion code<br/>
 - Delete promotion code<br/>
 
 ## [1.2/1.2.1] - 2022-04-18
-### Added<Staff>
+### Added - Staff
 - View room list<br/>
 - Create a room<br/>
 - Launch a room<br/>
