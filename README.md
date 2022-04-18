@@ -7,6 +7,7 @@ Create project file<br/>
 ## [1.0] - 2022-04-08
 ### Added
 - Basic GUI for staff and student version<br/>
+- Establish connection to mysql<br/>
 - Log in System<br/>
 
 ## [1.1] - 2022-04-13
