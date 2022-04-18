@@ -25,16 +25,19 @@ import javafx.stage.Stage;
 public class Admin implements Initializable{
     private String username;
     private String role;
+
     //Constructor
     public Admin(){
 
     }
 
+    //Other constructor
     public Admin(String username, String role){
         this.username = username;
         this.role = role;
     }
 
+    //Declare FXML elements
     @FXML Label Welcome;
     @FXML Label Role;
     @FXML Label admin_role;
@@ -44,9 +47,14 @@ public class Admin implements Initializable{
     @FXML Button Createroom;
     @FXML Button Createpromo;
     @FXML Button Editpromo;
-    
+    @FXML Button addnewactive;
+    @FXML Button editactive;
+    @FXML Button Modifyroom;
+    @FXML Button Launchbutton;
+
     @FXML Label Promonameselected;
     @FXML Label Promovalueselected;
+    @FXML Label Idselected;
 
     @FXML
     protected TableColumn<Promocode, String> col_promoname;
@@ -58,21 +66,27 @@ public class Admin implements Initializable{
     @FXML
     private TableView<Room> Room;
     @FXML
-    private TableColumn<Room, ?> Rprice;
+    private TableColumn<Room, Double> Rprice;
     @FXML
-    private TableColumn<Room, ?> Rpromo;
+    private TableColumn<Room, Integer> RID;
     @FXML
-    private TableColumn<Room, ?> Rstatus;
+    private TableColumn<Room, String> Rstatus;
     @FXML
-    private TableColumn<Room, ?> Rtime;
+    private TableColumn<Room, String> Rtime;
     @FXML
-    private TableColumn<Room, ?> Rcapacity;
+    private TableColumn<Room, Integer> Rcapacity;
     @FXML
-    private TableColumn<Room, ?> Rdate;
+    private TableColumn<Room, String> Rdate;
     @FXML
-    private TableColumn<Room, ?> Rname;
+    private TableColumn<Room, String> Rname;
+
+    @FXML
+    private TableView<?> Activepromo;
+    @FXML
+    private TableColumn<?, ?> Activecode;
 
     ObservableList<Promocode> listP = FXCollections.observableArrayList();
+    ObservableList<Room> listR = FXCollections.observableArrayList();
     int index = -1;
     Resultset rs = null;
     PreparedStatement ps = null;
@@ -83,9 +97,13 @@ public class Admin implements Initializable{
         Welcome.setText("Welcome, "+username+" !");
         Role.setText("UOW "+role);
         updatePromo();
+        updateRoom();
         Editpromo.setDisable(true);
+        addnewactive.setDisable(true);
+        editactive.setDisable(true);
     }
 
+    //Update the promotion code table ~ refresh
     public void updatePromo(){
         col_promoname.setCellValueFactory(new PropertyValueFactory<Promocode, String>("name"));
         col_promovalue.setCellValueFactory(new PropertyValueFactory<Promocode, Integer>("value"));
@@ -93,6 +111,20 @@ public class Admin implements Initializable{
         table_promo.setItems(listP);
     }
 
+    //Update room list ~ refresh
+    public void updateRoom(){
+        RID.setCellValueFactory(new PropertyValueFactory<Room, Integer>("id"));
+        Rname.setCellValueFactory(new PropertyValueFactory<Room, String>("name"));
+        Rdate.setCellValueFactory(new PropertyValueFactory<Room, String>("date"));
+        Rtime.setCellValueFactory(new PropertyValueFactory<Room, String>("time"));
+        Rcapacity.setCellValueFactory(new PropertyValueFactory<Room, Integer>("capacity"));
+        Rprice.setCellValueFactory(new PropertyValueFactory<Room, Double>("price"));
+        Rstatus.setCellValueFactory(new PropertyValueFactory<Room, String>("status"));
+        listR = getDataRoom();
+        Room.setItems(listR);
+    }
+
+    //Get promotion code data from mysql
     public ObservableList<Promocode> getDataPromo(){ 
         Main m = new Main();
         Connection con = m.getC().getConnection();
@@ -102,6 +134,30 @@ public class Admin implements Initializable{
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 list.add(new Promocode(rs.getString("Code_name"), Integer.parseInt(rs.getString("Code_sale"))));
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
+    //Get room data from mysql
+    public ObservableList<Room> getDataRoom(){
+        Main m = new Main();
+        Connection con = m.getC().getConnection();
+        ObservableList<Room> list = FXCollections.observableArrayList();
+        try{
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM room");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                list.add(new Room(rs.getInt("ID"), 
+                                String.format("%s.%s.%s", rs.getString("BlkNum"), rs.getString("Floor"), rs.getString("RoomNum")), 
+                                rs.getString("Date"), 
+                                rs.getString("Time"), 
+                                rs.getString("Status"), 
+                                rs.getString("Price"), 
+                                rs.getInt("Capacity")));
             }
         }
         catch(Exception e){
@@ -128,6 +184,16 @@ public class Admin implements Initializable{
     //Event trigger (edit promo)
     public void Editpromo(ActionEvent event) throws Exception{
         editpromo();
+    }
+
+    //Event trigger (Launch room)
+    public void Launch(ActionEvent event) throws Exception{
+        //launch();
+    }
+
+    //Event trigger (Modify room)
+    public void Modify(ActionEvent event) throws Exception{
+        //modify();
     }
 
     //Log out
@@ -163,6 +229,16 @@ public class Admin implements Initializable{
         Promonameselected.setText(col_promoname.getCellData(index).toString()); 
         Promovalueselected.setText(col_promovalue.getCellData(index).toString());
         Editpromo.setDisable(false);
+    }
+
+    //Room selected
+    @FXML
+    public void getSelectedRoom(MouseEvent event){
+        index = Room.getSelectionModel().getSelectedIndex();
+        if(index <= -1){
+            return;
+        }
+        Idselected.setText(RID.getCellData(index).toString());
     }
 
     //Create new editpromo form

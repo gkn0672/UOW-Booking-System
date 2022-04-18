@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import com.mysql.cj.protocol.Resultset;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,28 +16,30 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class Add_new_room  extends Admin {
     ObservableList<String> Blknumber = FXCollections.observableArrayList("A", "B", "C");
-    ObservableList<String> Promo = FXCollections.observableArrayList();
+    ObservableList<String> RFloor = FXCollections.observableArrayList("1", "2", "3", "4", "5");
     private Main m;
     private LocalDate mydate;
     private Admin ad;
     private String date;
     private String time;
+
+    //Constructor
     public Add_new_room(String username, String role, Main m, Admin ad) throws Exception{
         super(username, role);
         this.m = m;
         this.ad = ad;
-        initpromo();
     }
 
     @FXML Button Confirmcreate;
     @FXML Button Cancelbutton;
 
     @FXML ComboBox<String> Blknum;  
-    @FXML ComboBox<String> Selectpromo;
+    @FXML ComboBox<String> Floor;
 
     @FXML DatePicker Date;
 
@@ -50,12 +50,15 @@ public class Add_new_room  extends Admin {
     @FXML TextField Roomnumber;
     @FXML TextField Capacity;
     
+    @FXML Label Newroomerror;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         Blknum.setValue("A");
         Blknum.setItems(Blknumber);
-        
-        Selectpromo.setItems(Promo);
+
+        Floor.setValue("1");
+        Floor.setItems(RFloor);
         Hour.TimerestrictHour();
         Min.TimerestrictMin();
     }
@@ -75,35 +78,39 @@ public class Add_new_room  extends Admin {
         getdateformat();
     }
 
+    //Confirm to create a new room
     public void confirmcreate() throws Exception{
+        Newroomerror.setVisible(false);
         try{
             Connection con = m.getC().getConnection();
             PreparedStatement ps;
 
-            ps = con.prepareStatement("SELECT * FROM `room` WHERE `BlkNum` = ? AND `RoomNum` = ?");
-            ps.setString(1, Blknum.getValue());
-            ps.setString(2, Roomnumber.getText());
+            ps = con.prepareStatement("SELECT * FROM `room` WHERE `RoomNum` = ? AND `BlkNum` = ? AND `Floor` = ? AND `Date` = ? AND `Time` = ?");
+            ps.setString(1, Roomnumber.getText());
+            ps.setString(2, Blknum.getValue());
+            ps.setString(3, Floor.getValue());
+            ps.setString(4, date);
+            gettime();
+            ps.setString(5, time);
             ResultSet rs = (ResultSet) ps.executeQuery();
 
             if(((ResultSet)rs).next()){
-                System.out.println("Already exist");
+                Newroomerror.setText("Room already exist");
+                Newroomerror.setVisible(true);
             }
             else{
-                ps = con.prepareStatement("INSERT INTO room (`RoomNum`, `BlkNum`, `Status`, `Price`, `Capacity`, `Date`, `Time`, `Promo_code`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-                ps.setString(1, Roomnumber.getText());
-                ps.setString(2, Blknum.getValue());
-                ps.setString(3, "Not available");
-                ps.setString(4, Price.getText());
-                ps.setString(5, Capacity.getText());
-                ps.setString(6, date);
+                ps = con.prepareStatement("INSERT INTO room (`ID`, `RoomNum`, `BlkNum`, `Floor`, `Date`, `Time`, `Capacity`, `Status`, `Price`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                ps.setString(1, null);
+                ps.setString(2, Roomnumber.getText());
+                ps.setString(3, Blknum.getValue());
+                ps.setString(4, Floor.getValue());
+                ps.setString(5, date);
+
                 gettime();
-                ps.setString(7, time);
-                if(Selectpromo.getValue() == null){
-                    ps.setString(8, null);
-                }
-                else{
-                    ps.setString(8, Selectpromo.getValue());
-                }
+                ps.setString(6, time);
+                ps.setString(7, Capacity.getText());
+                ps.setString(8, "Not available");
+                ps.setString(9, Price.getText());
 
                 if(ps.executeUpdate() != 0){
                     cancel(Cancelbutton);
@@ -112,26 +119,15 @@ public class Add_new_room  extends Admin {
                     Success_message sm1 = new Success_message("Room added");
                     loader.setController(sm1);
                     m.popup(loader, "Success", 332, 194, 650, 250);  
-                    ad.updatePromo();
+                    ad.updateRoom();
                 }
                 else{
-                    System.out.println("Update failed");
+                    System.out.println("update failed");
                 }
             }
         }
         catch(Exception e){
             System.out.println(e.getMessage());
-        }
-    }
-
-    //Confirm create a room (Send data to mysql server)
-    public void initpromo() throws Exception{
-        Connection con = m.getC().getConnection();
-        PreparedStatement ps;
-        ps = con.prepareStatement("SELECT `Code_name` FROM `promotioncode`");
-        Resultset rs = (Resultset) ps.executeQuery();
-        while(((ResultSet) rs).next()){
-            Promo.add(((ResultSet) rs).getString(1));
         }
     }
 

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
+
 public class Main extends Application {
     private static Stage stg;
     private static MysqlConnect c1;
@@ -42,13 +43,16 @@ public class Main extends Application {
     //Change the scene
     public void createScene(FXMLLoader loader, String title, double width, double length, double x, double y) throws IOException{
         try{
+            //Load the scene
             Scene sc = new Scene(loader.load(), width, length);
             stg.setTitle(title);
             stg.setResizable(false);
 
+            //Set position
             stg.setY(y);
             stg.setX(x);
 
+            //Display
             stg.setScene(sc);
             stg.show();
         }
@@ -61,16 +65,25 @@ public class Main extends Application {
     //Create pop up window
     public void popup(FXMLLoader loader, String title, double width, double length, double x, double y) throws IOException{
         try{
+            //New pop up window
             Stage stage = new Stage();
             Scene sc = new Scene(loader.load(), width, length);
+
+            //Set title
             stage.setTitle(title);
+
+            //Cannot resize window
             stage.setResizable(false);
 
+            //Set position
             stage.setY(y);
             stage.setX(x);
 
-            stage.setScene(sc);
+            //Disable close button on top right
             stage.initStyle(StageStyle.UNDECORATED);
+
+            //Show screen
+            stage.setScene(sc);
             stage.show();
         }
         catch (IOException e){
