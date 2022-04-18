@@ -34,7 +34,7 @@ public class LimitedTextField extends TextField {
 				}
 	
 				if (ignore == true){
-					setText(null);
+					setText(s);
 					ignore = false;
 				}
 			}
@@ -111,5 +111,10 @@ public class LimitedTextField extends TextField {
 	public void TimerestrictHour() {
 		this.setRestrict("0?[0-9]|1[0-9]|2[0-3]");
 		this.setMaxLength(3);
+	}
+
+	public void Restrictprice(){
+		this.setRestrict("[0-9.]");
+		this.setMaxLength(11);
 	}
 }

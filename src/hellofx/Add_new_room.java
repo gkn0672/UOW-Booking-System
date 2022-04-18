@@ -45,8 +45,8 @@ public class Add_new_room  extends Admin {
 
     @FXML LimitedTextField Hour = new LimitedTextField();
     @FXML LimitedTextField Min = new LimitedTextField();
+    @FXML LimitedTextField Price = new LimitedTextField();
 
-    @FXML TextField Price;
     @FXML TextField Roomnumber;
     @FXML TextField Capacity;
     
@@ -61,6 +61,7 @@ public class Add_new_room  extends Admin {
         Floor.setItems(RFloor);
         Hour.TimerestrictHour();
         Min.TimerestrictMin();
+        Price.Restrictprice();
     }
 
     //Event trigger

@@ -96,11 +96,15 @@ public class Admin implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1) {
         Welcome.setText("Welcome, "+username+" !");
         Role.setText("UOW "+role);
+
         updatePromo();
         updateRoom();
+
         Editpromo.setDisable(true);
         addnewactive.setDisable(true);
         editactive.setDisable(true);
+        Launchbutton.setDisable(true);
+        Modifyroom.setDisable(true);
     }
 
     //Update the promotion code table ~ refresh
@@ -188,7 +192,23 @@ public class Admin implements Initializable{
 
     //Event trigger (Launch room)
     public void Launch(ActionEvent event) throws Exception{
-        //launch();
+        Main m = new Main();
+        Connection con = m.getC().getConnection();
+        try{
+            PreparedStatement ps = con.prepareStatement("UPDATE `room` SET `Status` = ? WHERE `ID` = ?");
+            ps.setString(1, "Available");
+            ps.setString(2, Idselected.getText());
+            ps.execute();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Success_message.fxml"));
+            Success_message sm1 = new Success_message("Launch success!");
+            loader.setController(sm1);
+            m.popup(loader, "Success", 332, 194, 650, 250);  
+            updateRoom();
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     //Event trigger (Modify room)
@@ -239,6 +259,15 @@ public class Admin implements Initializable{
             return;
         }
         Idselected.setText(RID.getCellData(index).toString());
+        String status = Rstatus.getCellData(index).toString();
+
+        if(status.equals("Not available")){
+            Launchbutton.setDisable(false);
+        }else{
+            Launchbutton.setDisable(true);
+        }
+
+        Modifyroom.setDisable(false);
     }
 
     //Create new editpromo form
