@@ -43,12 +43,12 @@
                   <Font size="19.0" />
                </font>
             </Label>
-            <Label layoutX="40.0" layoutY="254.0" text="Price:">
+            <Label layoutX="42.0" layoutY="254.0" text="Price:">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
-            <Label layoutX="40.0" layoutY="94.0" text="Capacity:">
+            <Label layoutX="40.0" layoutY="94.0" text="Floor">
                <font>
                   <Font size="19.0" />
                </font>
@@ -63,22 +63,27 @@
                   <Font size="19.0" />
                </font>
             </Label>
-            <Label layoutX="40.0" layoutY="214.0" text="Promocode:">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
             <TextField fx:id="Roomnumber" layoutX="198.0" layoutY="16.0" promptText="Room number" />
-            <TextField fx:id="Capacity" layoutX="198.0" layoutY="95.0" promptText="Capacity (Max 150)" />
-            <TextField fx:id="Price" layoutX="198.0" layoutY="256.0" />
+            <TextField fx:id="Price" layoutX="198.0" layoutY="254.0" />
             <ComboBox fx:id="Blknum" layoutX="198.0" layoutY="56.0" prefWidth="150.0" />
             <DatePicker fx:id="Date" layoutX="198.0" layoutY="135.0" onAction="#getDate" prefHeight="26.0" prefWidth="158.0" />
             <LimitedTextField fx:id="Hour" layoutX="198.0" layoutY="176.0" prefHeight="26.0" prefWidth="38.0" />
             <LimitedTextField fx:id="Min" layoutX="273.0" layoutY="176.0" prefHeight="26.0" prefWidth="38.0" />
-            <ComboBox fx:id="Selectpromo" layoutX="198.0" layoutY="216.0" prefWidth="150.0" />
             <Label layoutX="253.0" layoutY="174.0" prefHeight="18.0" prefWidth="18.0" text=":">
                <font>
                   <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="Floor" layoutX="198.0" layoutY="96.0" prefWidth="150.0" />
+            <Label layoutX="40.0" layoutY="214.0" prefHeight="28.0" prefWidth="92.0" text="Capacity:">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Capacity" layoutX="198.0" layoutY="215.0" />
+            <Label fx:id="Newroomerror" alignment="CENTER" layoutX="45.0" layoutY="342.0" prefHeight="18.0" prefWidth="312.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font name="System Italic" size="14.0" />
                </font>
             </Label>
          </children>
