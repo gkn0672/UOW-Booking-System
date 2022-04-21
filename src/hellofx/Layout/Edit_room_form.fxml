@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <AnchorPane prefHeight="79.0" prefWidth="395.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
          <children>
@@ -20,7 +20,7 @@
                   <Image url="@../Image/UOW_logo_staff.jpg" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="82.0" layoutY="20.0" prefHeight="18.0" prefWidth="311.0" text="Create new room" textFill="WHITE" AnchorPane.rightAnchor="2.0">
+            <Label alignment="CENTER" layoutX="82.0" layoutY="20.0" prefHeight="18.0" prefWidth="311.0" text="Edit room" textFill="WHITE" AnchorPane.rightAnchor="2.0">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
@@ -29,10 +29,10 @@
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="395.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="Confirmcreate" layoutX="262.0" layoutY="378.0" mnemonicParsing="false" onAction="#Confirmcreateroom" prefHeight="34.0" prefWidth="96.0" text="Create" />
-            <Button fx:id="Cancelbutton" layoutX="42.0" layoutY="378.0" mnemonicParsing="false" onAction="#Cancelcreate" prefHeight="34.0" prefWidth="96.0" text="Cancel" />
+            <Button fx:id="Confirmedit" layoutX="260.0" layoutY="446.0" mnemonicParsing="false" onAction="#Confirmeditroom" prefHeight="34.0" prefWidth="96.0" text="Update" />
+            <Button fx:id="Cancelbutton" layoutX="45.0" layoutY="446.0" mnemonicParsing="false" onAction="#Canceledit" prefHeight="34.0" prefWidth="96.0" text="Cancel" />
             <Label layoutX="40.0" layoutY="14.0" text="Room number: ">
                <font>
                   <Font size="19.0" />
@@ -79,7 +79,7 @@
                </font>
             </Label>
             <TextField fx:id="Capacity" layoutX="198.0" layoutY="254.0" />
-            <Label fx:id="Newroomerror" alignment="CENTER" layoutX="45.0" layoutY="342.0" prefHeight="18.0" prefWidth="312.0" text="Label" textFill="RED" visible="false">
+            <Label fx:id="Editroomerror" alignment="CENTER" layoutX="45.0" layoutY="342.0" prefHeight="18.0" prefWidth="312.0" text="Error" textFill="RED" visible="false">
                <font>
                   <Font name="System Italic" size="14.0" />
                </font>
@@ -87,6 +87,14 @@
             <ComboBox fx:id="Hour" layoutX="198.0" layoutY="214.0" prefHeight="26.0" prefWidth="61.0" />
             <ComboBox fx:id="Min" layoutX="291.0" layoutY="214.0" prefHeight="26.0" prefWidth="61.0" />
             <ComboBox fx:id="TimeSet" layoutX="198.0" layoutY="174.0" onAction="#timeset" prefHeight="26.0" prefWidth="62.0" />
+            <Button fx:id="Delete" layoutX="153.0" layoutY="446.0" mnemonicParsing="false" onAction="#Deleteroom" prefHeight="34.0" prefWidth="96.0" text="Delete" />
+            <Label fx:id="Deletewarn" alignment="CENTER" layoutX="199.0" layoutY="381.0" prefHeight="18.0" prefWidth="146.0" text="Type &quot;Confirm&quot; to delete" textFill="RED" visible="false" />
+            <Label layoutX="42.0" layoutY="406.0" text="Delete this?">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Deleteconfirm" layoutX="198.0" layoutY="407.0" onKeyReleased="#Deletecheck" onMouseClicked="#Deletewarnshow" />
          </children>
       </AnchorPane>
    </center>

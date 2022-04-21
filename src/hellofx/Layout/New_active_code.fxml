@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="235.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="74.0" prefWidth="374.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="119.0" fitWidth="88.0" layoutX="14.0" layoutY="-3.0" preserveRatio="true" AnchorPane.leftAnchor="14.0">
+               <image>
+                  <Image url="@../Image/UOW_logo_staff.jpg" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="88.0" layoutY="20.0" prefHeight="42.0" prefWidth="284.0" text="Add promocode" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="114.0" prefWidth="374.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="Confirmactive" layoutX="241.0" layoutY="107.0" mnemonicParsing="false" onAction="#Confirmactive" prefHeight="34.0" prefWidth="96.0" text="Add" />
+            <Button fx:id="Cancel" layoutX="41.0" layoutY="107.0" mnemonicParsing="false" onAction="#Cancelactive" prefHeight="34.0" prefWidth="96.0" text="Cancel" />
+            <Label layoutX="19.0" layoutY="38.0" prefHeight="35.0" prefWidth="138.0" text="Code name:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="Promolist" layoutX="186.0" layoutY="43.0" onAction="#Activecheck" prefWidth="150.0" />
+            <Label fx:id="Activeerror" alignment="CENTER" layoutX="188.0" layoutY="14.0" prefHeight="18.0" prefWidth="146.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </center>
+</BorderPane>

@@ -59,34 +59,35 @@
             </Label>
             <Button fx:id="Createbutton" layoutX="139.0" layoutY="546.0" mnemonicParsing="false" onAction="#Createroom" prefHeight="26.0" prefWidth="111.0" text="Create room" />
             <Button fx:id="Modifyroom" layoutX="323.0" layoutY="546.0" mnemonicParsing="false" onAction="#Modify" prefHeight="26.0" prefWidth="111.0" text="Modify room" />
-            <Button fx:id="Createpromobutton" layoutX="795.0" layoutY="269.0" mnemonicParsing="false" onAction="#Createpromo" prefHeight="26.0" prefWidth="92.0" text="New Promo" />
-            <TableView fx:id="table_promo" layoutX="795.0" layoutY="33.0" onMouseClicked="#getSelectedPromo" prefHeight="223.0" prefWidth="194.0">
+            <Button fx:id="Createpromobutton" layoutX="817.0" layoutY="269.0" mnemonicParsing="false" onAction="#Createpromo" prefHeight="26.0" prefWidth="92.0" text="New Promo" />
+            <TableView fx:id="table_promo" layoutX="821.0" layoutY="33.0" onMouseClicked="#getSelectedPromo" prefHeight="223.0" prefWidth="194.0">
               <columns>
                 <TableColumn fx:id="col_promoname" prefWidth="97.59999084472656" text="Code name" />
                   <TableColumn fx:id="col_promovalue" prefWidth="101.5999755859375" text="Value" />
               </columns>
             </TableView>
-            <Button fx:id="Editpromo" layoutX="899.0" layoutY="269.0" mnemonicParsing="false" onAction="#Editpromo" prefHeight="26.0" prefWidth="92.0" text="Edit" />
-            <Label alignment="CENTER" layoutX="793.0" layoutY="-4.0" prefHeight="40.0" prefWidth="197.0" text="Promocode list">
+            <Button fx:id="Editpromo" layoutX="927.0" layoutY="269.0" mnemonicParsing="false" onAction="#Editpromo" prefHeight="26.0" prefWidth="92.0" text="Edit" />
+            <Label alignment="CENTER" layoutX="820.0" layoutY="-1.0" prefHeight="40.0" prefWidth="197.0" text="Promocode list">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
             <Label fx:id="Promonameselected" layoutX="251.0" layoutY="120.0" text="Label" visible="false" />
             <Label fx:id="Promovalueselected" layoutX="251.0" layoutY="164.0" text="Label" visible="false" />
-            <TableView fx:id="Activepromo" layoutX="837.0" layoutY="332.0" prefHeight="200.0" prefWidth="110.0">
+            <TableView fx:id="Activepromo" layoutX="863.0" layoutY="335.0" onMouseClicked="#getSelectedActive" prefHeight="200.0" prefWidth="110.0">
               <columns>
                 <TableColumn fx:id="Activecode" prefWidth="109.6000732421875" text="Active code" />
               </columns>
             </TableView>
-            <Button fx:id="addnewactive" layoutX="828.0" layoutY="546.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" text="Add" />
-            <Button fx:id="Launchbutton" layoutX="540.0" layoutY="545.0" mnemonicParsing="false" onAction="#Launch" prefHeight="26.0" prefWidth="111.0" text="Launch" />
-            <Button fx:id="editactive" layoutX="899.0" layoutY="546.0" mnemonicParsing="false" text="Manage" />
+            <Button fx:id="addnewactive" layoutX="850.0" layoutY="543.0" mnemonicParsing="false" onAction="#AddActive" prefHeight="26.0" prefWidth="58.0" text="Add" />
+            <Button fx:id="Launchbutton" layoutX="484.0" layoutY="546.0" mnemonicParsing="false" onAction="#Launch" prefHeight="26.0" prefWidth="111.0" text="Launch" />
             <Label fx:id="Idselected" alignment="CENTER" layoutX="793.0" layoutY="295.0" prefHeight="40.0" prefWidth="197.0" text="IDIDID" visible="false">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
+            <Button fx:id="CloseRoom" layoutX="632.0" layoutY="544.0" mnemonicParsing="false" onAction="#Closeroom" prefHeight="26.0" prefWidth="111.0" text="Close" />
+            <Button fx:id="Deleteactive" layoutX="927.0" layoutY="543.0" mnemonicParsing="false" onAction="#Deleteactive" prefHeight="26.0" prefWidth="58.0" text="Delete" />
          </children>
       </AnchorPane>
    </center>
