@@ -65,6 +65,9 @@ public class Edit_promo extends Admin{
         if ((Deleteconfirm.getText()).equals("Confirm")){
             Deletepromo.setDisable(false);
         }
+        else{
+            Deletepromo.setDisable(true);
+        }
     }
 
     //Show delete warning

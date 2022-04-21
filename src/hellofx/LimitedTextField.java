@@ -8,6 +8,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
+//Special text field for validate input
+
 public class LimitedTextField extends TextField {
 	private IntegerProperty maxLength = new SimpleIntegerProperty(this,
 			"maxLength", -1);
@@ -101,16 +103,6 @@ public class LimitedTextField extends TextField {
 
 	public void setRestrict(String restrict) {
 		this.restrict.set(restrict);
-	}
-
-	public void TimerestrictMin() {
-		this.setRestrict("0?[0-9]|[1-5][0-9]");
-		this.setMaxLength(2);
-	}
-
-	public void TimerestrictHour() {
-		this.setRestrict("0?[0-9]|1[0-9]|2[0-3]");
-		this.setMaxLength(3);
 	}
 
 	public void Restrictprice(){

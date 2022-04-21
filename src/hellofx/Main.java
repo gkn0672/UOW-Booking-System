@@ -20,12 +20,13 @@ public class Main extends Application {
         return c1;
     }
 
+    //Get stage
     public Stage getStage(){
         return stg;
     }
 
     @Override
-    //Show Login form
+    //Show Login form (First run)
     public void start(Stage PrimaryStage) throws Exception{      
 
         //Init Xampp connection
@@ -59,6 +60,7 @@ public class Main extends Application {
         catch(IOException e){
             System.out.println("Error when loading the scene");
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -89,6 +91,7 @@ public class Main extends Application {
         catch (IOException e){
             System.out.println("Error when load pop up window");
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

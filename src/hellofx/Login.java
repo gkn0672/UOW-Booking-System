@@ -10,10 +10,11 @@ import javafx.scene.control.TextField;
 import java.sql.*;
 
 public class Login {
+    //Constructor
     public Login(){
-
     }
 
+    //FXML element
     @FXML Button Lgnbutton;
     @FXML TextField Username;
     @FXML PasswordField Password;
@@ -21,7 +22,7 @@ public class Login {
     @FXML Label Passwordmissing;
     @FXML Label LoginError;
 
-    //Event trigger
+    //Event trigger when login
     public void userLogin(ActionEvent event) throws Exception{
         checkLogin();
     }

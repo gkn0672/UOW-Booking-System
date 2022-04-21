@@ -4,10 +4,10 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,11 +22,16 @@ import javafx.scene.control.TextField;
 public class Add_new_room  extends Admin {
     ObservableList<String> Blknumber = FXCollections.observableArrayList("A", "B", "C");
     ObservableList<String> RFloor = FXCollections.observableArrayList("1", "2", "3", "4", "5");
+    ObservableList<String> RHourA = FXCollections.observableArrayList("07","08","09","10","11");
+    ObservableList<String> RHourP = FXCollections.observableArrayList("12","01","02","03","04", "05", "06", "07", "08", "09");
+    ObservableList<String> RMin = FXCollections.observableArrayList("00", "15", "30", "45");
+    ObservableList<String> RTimeSet = FXCollections.observableArrayList("AM", "PM");
     private Main m;
     private LocalDate mydate;
     private Admin ad;
     private String date;
     private String time;
+
 
     //Constructor
     public Add_new_room(String username, String role, Main m, Admin ad) throws Exception{
@@ -40,11 +45,12 @@ public class Add_new_room  extends Admin {
 
     @FXML ComboBox<String> Blknum;  
     @FXML ComboBox<String> Floor;
+    @FXML ComboBox<String> Hour;
+    @FXML ComboBox<String> Min;
+    @FXML ComboBox<String> TimeSet;
 
     @FXML DatePicker Date;
 
-    @FXML LimitedTextField Hour = new LimitedTextField();
-    @FXML LimitedTextField Min = new LimitedTextField();
     @FXML LimitedTextField Price = new LimitedTextField();
 
     @FXML TextField Roomnumber;
@@ -59,14 +65,31 @@ public class Add_new_room  extends Admin {
 
         Floor.setValue("1");
         Floor.setItems(RFloor);
-        Hour.TimerestrictHour();
-        Min.TimerestrictMin();
+        Hour.setValue("08");
+        Hour.setItems(RHourA);
+        Min.setValue("30");
+        Min.setItems(RMin);
+        TimeSet.setValue("AM");
+        TimeSet.setItems(RTimeSet);
         Price.Restrictprice();
     }
 
     //Event trigger
     public void Cancelcreate(ActionEvent event) throws Exception{
         cancel(Cancelbutton);
+    }
+
+    //Event trigger (time set)
+    public void timeset(ActionEvent event) throws Exception{
+        String ts = TimeSet.getValue();
+        if (ts.equals("PM")){
+            Hour.setItems(RHourP);
+            Hour.setValue("12");
+        }
+        else{
+            Hour.setItems(RHourA);
+            Hour.setValue("08");
+        }
     }
 
     //Event trigger (confirm create room)
@@ -100,7 +123,7 @@ public class Add_new_room  extends Admin {
                 Newroomerror.setVisible(true);
             }
             else{
-                ps = con.prepareStatement("INSERT INTO room (`ID`, `RoomNum`, `BlkNum`, `Floor`, `Date`, `Time`, `Capacity`, `Status`, `Price`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                ps = con.prepareStatement("INSERT INTO room (`ID`, `RoomNum`, `BlkNum`, `Floor`, `Date`, `Time`, `Timeset`, `Capacity`, `Status`, `Price`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 ps.setString(1, null);
                 ps.setString(2, Roomnumber.getText());
                 ps.setString(3, Blknum.getValue());
@@ -109,9 +132,10 @@ public class Add_new_room  extends Admin {
 
                 gettime();
                 ps.setString(6, time);
-                ps.setString(7, Capacity.getText());
-                ps.setString(8, "Not available");
-                ps.setString(9, Price.getText());
+                ps.setString(7, TimeSet.getValue());
+                ps.setString(8, Capacity.getText());
+                ps.setString(9, "Not available");
+                ps.setString(10, Price.getText());
 
                 if(ps.executeUpdate() != 0){
                     cancel(Cancelbutton);
@@ -144,26 +168,29 @@ public class Add_new_room  extends Admin {
     }
 
     //Get time format
-    public void gettime(){
-        int hour = Integer.parseInt(Hour.getText());
-        int minute = Integer.parseInt(Min.getText());
-        String finalhour;
-        String finalmin;
+    public void gettime() throws ParseException{
+        int hour = Integer.parseInt(Hour.getValue());
+        String minute = Min.getValue();
+        String timeset = TimeSet.getValue();
 
-        if (hour < 10){
-            finalhour = String.format("0%s", String.valueOf(hour));
+        if(timeset.equals("PM") && hour != 12){
+            hour += 12;
+            time = String.format("%s:%s:00", String.valueOf(hour), minute);
+        }
+
+        else if(hour < 10){
+            time = String.format("0%s:%s:00", String.valueOf(hour), minute);
         }
         else{
-            finalhour = String.format("%s", String.valueOf(hour));
+            time = String.format("%s:%s:00", hour, minute);
         }
 
-        if(minute < 10){
-            finalmin = String.format("0%s", String.valueOf(minute));
+        if(timeset.equals("AM") && hour < 10){
+            time = String.format("0%s:%s:00", String.valueOf(hour), minute);
         }
         else{
-            finalmin = String.format("%s", String.valueOf(minute));
+            time = String.format("%s:%s:00", hour, minute);
         }
 
-        time = String.format("%s:%s:00", finalhour, finalmin);
     }
 }

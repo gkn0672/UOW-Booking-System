@@ -4,6 +4,7 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+//Object class
 public class Room {
     private int id;
     private String name;
@@ -11,19 +12,25 @@ public class Room {
     private String time;
     private String status;
     private String price;
+    private String timeset;
     private int capacity;
 
     //Constructor
-    public Room(int id, String name, String date, String time, String status, String price, int capacity) throws ParseException{
+    public Room(int id, String name, String date, String time, String status, String price, int capacity, String timeset) throws ParseException{
         this.id = id;
         this.name = name;
         this.date = getDateFormat(date);
-        this.time = getTimeFormat(time);
+
+        //Time format e.g: 12:30 PM
+        this.time = getTimeFormat(time) + " " + timeset;
+
         this.status = status;
 
         //Format price e.g: $5.00
         this.price = String.format("$%s", price);
         this.capacity = capacity;
+
+        this.timeset = timeset;
     }
 
     //get room id
@@ -34,6 +41,11 @@ public class Room {
     //get room name
     public String getName(){
         return name;
+    }
+
+    //get timeset name
+    public String getTimset(){
+        return timeset;
     }
 
     //Format date e.g: 12 Mar 2022
@@ -53,7 +65,7 @@ public class Room {
     //Format time e.g: 12:09 pm
     public String getTimeFormat(String time) throws ParseException{
         final String OLD_FORMAT = "hh:mm:ss";
-        final String NEW_FORMAT = "hh:mm aa";
+        final String NEW_FORMAT = "hh:mm";
 
         String newTimeString;
 

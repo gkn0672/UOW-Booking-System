@@ -1,5 +1,7 @@
 package hellofx;
 
+//Object class
+
 public class Promocode {
     private String name;
     private int value;
