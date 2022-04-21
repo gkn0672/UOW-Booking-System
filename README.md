@@ -25,5 +25,14 @@ Create project file<br/>
 ### Changed
 - Major change in room database<br/>
 
-
+## [1.2.2] - 2022-04-21
+### Added - Staff
+- Change/delete a room<br/>
+- Add promotion code to the room<br/>
+- View promotion code that can be used in a room<br/>
+- Delete promotion code from a room<br/>
+### Changed
+- Time format from hh:mm:ss to hh:mm aa<br/>
+- Restrict time select<br/>
+- During data update, some element will be reset/disable to prevent crash<br/>
 
