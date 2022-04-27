@@ -46,7 +46,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="Username" layoutX="300.0" layoutY="1.0" promptText="Username" />
+            <TextField fx:id="Username" layoutX="300.0" layoutY="1.0" onAction="#nextField" promptText="Username" />
             <Label fx:id="Usernamemissing" layoutX="454.0" layoutY="3.0" text="*" textFill="RED" visible="false">
                <font>
                   <Font size="15.0" />
