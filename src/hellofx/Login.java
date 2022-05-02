@@ -22,10 +22,15 @@ public class Login {
     @FXML Label Passwordmissing;
     @FXML Label LoginError;
 
+    //Event trigger when pressing "Enter" key on username field
+    public void nextField(ActionEvent event) throws Exception{
+        Password.requestFocus();
+    }
     //Event trigger when login
     public void userLogin(ActionEvent event) throws Exception{
         checkLogin();
     }
+
 
     //Validate log in
     private void checkLogin() throws Exception{
