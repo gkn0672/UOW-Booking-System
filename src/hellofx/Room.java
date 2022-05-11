@@ -100,4 +100,8 @@ public class Room {
     public int getCapacity(){
         return capacity;
     }
+
+    public static Object getSelectionModel() {
+        return null;
+    }
 }

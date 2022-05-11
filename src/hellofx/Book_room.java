@@ -1,30 +1,23 @@
 package hellofx;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 
 public class Book_room extends Student{
     private Main m;
     private Student s;
-    private String id;
-    public Book_room (String username, String role, Main m, String id, Student s){
+    private int id;
+    public Book_room (String username, String role, Main m, int id, Student s){
         super(username, role);
         this.m = m;
         this.id = id;
@@ -133,7 +126,7 @@ void Confirmbooking(ActionEvent event) throws Exception{
     Success_message sm1 = new Success_message("Booking Successful");
     loader.setController(sm1);
     m.popup(loader, "Success", 332, 194, 650, 250);  
-    s.updateBookingList(Integer.parseInt(id));
+    s.updateBookingList();
     }
 
     }

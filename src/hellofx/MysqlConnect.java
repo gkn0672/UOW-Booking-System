@@ -9,6 +9,8 @@ import javafx.scene.control.Alert.AlertType;
 
 public class MysqlConnect {
     public static Connection conn;
+
+    //Current template
     static String template = "jdbc:mysql://localhost/%s?useEncoding=true&characterEncoding=UTF-8&user=%s&password=%s";
 
     //Default constructor
