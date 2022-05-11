@@ -126,13 +126,12 @@ public class Student implements Initializable{
     }
 
     @FXML
-    public void getSelectedRoom(MouseEvent event){
+    public void getSelectedR(MouseEvent event){
         index = Roomavailable.getSelectionModel().getSelectedIndex();
         if(index <= -1){
             return;
         }
         selectedid = RID.getCellData(index);
-        Modifybutton.setDisable(false);
         Bookbutton.setDisable(false);
     }
     
