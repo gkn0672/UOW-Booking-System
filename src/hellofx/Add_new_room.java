@@ -18,6 +18,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyEvent;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Add_new_room  extends Admin {
     ObservableList<String> Blknumber = FXCollections.observableArrayList("A", "B", "C");
@@ -51,11 +56,9 @@ public class Add_new_room  extends Admin {
 
     @FXML DatePicker Date;
 
-    @FXML LimitedTextField Price = new LimitedTextField();
-
     @FXML TextField Roomnumber;
     @FXML TextField Capacity;
-    
+    @FXML TextField Price;
     @FXML Label Newroomerror;
 
     @Override
@@ -71,7 +74,9 @@ public class Add_new_room  extends Admin {
         Min.setItems(RMin);
         TimeSet.setValue("AM");
         TimeSet.setItems(RTimeSet);
-        Price.Restrictprice();
+
+        LocalDate thedate = LocalDate.now();
+        Date.setValue(thedate);
     }
 
     //Event trigger
@@ -100,6 +105,23 @@ public class Add_new_room  extends Admin {
     //Event trigger (Select date)
     public void getDate(ActionEvent event) throws Exception{
         getdateformat();
+    }
+
+    public void ValidatePrice(KeyEvent event){
+        final Pattern pattern = Pattern.compile("(\\d{1,2}\\.\\d{1,2})");
+        TextFormatter<?> formatter = new TextFormatter<>(change -> {
+            if (pattern.matcher(change.getControlNewText()).matches()) {
+                Newroomerror.setVisible(false);
+                Confirmcreate.setDisable(false);
+             return change; 
+            } else {
+                Newroomerror.setText("Invalid input");
+                Newroomerror.setVisible(true);
+                Confirmcreate.setDisable(true);
+            return change; 
+            }
+         });
+        Price.setTextFormatter(formatter);
     }
 
     //Confirm to create a new room

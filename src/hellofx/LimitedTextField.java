@@ -94,7 +94,7 @@ public class LimitedTextField extends TextField {
 	/**
 	 * Sets a regular expression character class which restricts the user input.
 	 *
-	 * E.g. [0-9] only allows numeric values.
+	 * 
 	 *
 	 * @param restrict
 	 * 
@@ -106,7 +106,7 @@ public class LimitedTextField extends TextField {
 	}
 
 	public void Restrictprice(){
-		this.setRestrict("[0-9][0-9].[0-9][0-9]");
+		this.setRestrict("[0-9]?[0-9]\\.[0-9]");
 		
 		this.setMaxLength(11);
 	}
