@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import com.mysql.cj.protocol.Resultset;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,10 +25,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class Student implements Initializable{
-    private String username;
+    public String username;
     private String role;
-    private int selectedid;
+    protected int selectedid;
     ObservableList<Room> listR = FXCollections.observableArrayList();
+    ObservableList<Bookinglist> ListA = FXCollections.observableArrayList();
     int index = -1;
     Resultset rs = null;
     PreparedStatement ps = null;
@@ -51,13 +53,16 @@ public class Student implements Initializable{
     private TableColumn<Room, Integer> RID;
 
     @FXML
-    private TableColumn<?, ?> RID1;
+    private TableColumn<Bookinglist, Integer> RID1;
 
     @FXML
     private TableColumn<Room, Integer> Rcapacity;
 
     @FXML
     private TableColumn<Room, String> Rdate;
+    
+    @FXML
+    private TableColumn<Bookinglist, String> Rdate1;
 
     @FXML
     private Button Refreshbutton;
@@ -65,14 +70,30 @@ public class Student implements Initializable{
     @FXML
     private TableColumn<Room, String> Rname;
 
+    
+    @FXML
+    private TableColumn<Bookinglist, String> Rname1;
+
     @FXML
     private TableView<Room> Roomavailable;
+
+    @FXML
+    private TableView<Bookinglist> Bookinglist;
 
     @FXML
     private TableColumn<Room, Double> Rprice;
 
     @FXML
     private TableColumn<Room, String> Rtime;
+
+    @FXML
+    private TableColumn<Bookinglist, String> Rtime1;
+
+    @FXML
+    private TableColumn<Bookinglist, String> RDcode;
+
+    @FXML
+    private TableColumn<Bookinglist, String> RDprice;
 
     //Welcome menu when log in
     @Override
@@ -83,10 +104,21 @@ public class Student implements Initializable{
         updateRoom();
         Modifybutton.setDisable(true);
         Bookbutton.setDisable(true);
-        //updateBooking();
+        
+        RDcode.setCellValueFactory(cellData -> new ReadOnlyStringWrapper("hi"));
+        Bookinglist.refresh();
     }
     
     public void updateBookingList(){
+        RID1.setCellValueFactory(new PropertyValueFactory<Bookinglist, Integer>("id"));
+        Rname1.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("Rname"));
+        Rdate1.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("date"));
+        Rtime1.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("time"));
+        RDcode.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("RDCode"));
+        RDprice.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("price"));
+        ListA = getDataRoomBooking(selectedid);
+        Bookinglist.setItems(ListA);
+        Bookinglist.refresh();
 
     }
 
@@ -99,6 +131,30 @@ public class Student implements Initializable{
         Rprice.setCellValueFactory(new PropertyValueFactory<Room, Double>("price"));
         listR = getDataRoom();
         Roomavailable.setItems(listR);
+    }
+
+    public ObservableList<Bookinglist> getDataRoomBooking(int index){
+        Main m = new Main();
+        Connection con = m.getC().getConnection();
+        ObservableList<Bookinglist> list = FXCollections.observableArrayList();
+        try{
+            PreparedStatement ps = con.prepareStatement("SELECT room.ID, room.RoomNum, room.BlkNum, room.Floor, room.Date, room.Time, room.Timeset, booking.Code_name, booking.discountPrice FROM `room` INNER JOIN `booking` ON room.ID = booking.RID WHERE `ID` = ?");
+            ps.setString(1,String.valueOf(index));
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                list.add(new Bookinglist(rs.getInt("room.ID"), 
+                                String.format("%s.%s.%s", rs.getString("room.BlkNum"), rs.getString("room.Floor"), rs.getString("room.RoomNum")), 
+                                rs.getString("room.Date"), 
+                                rs.getString("room.Time"),
+                                rs.getString("booking.Code_name"),
+                                rs.getString("booking.discountPrice"),
+                                rs.getString("room.Timeset")));
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return list;
     }
 
     public ObservableList<Room> getDataRoom(){
@@ -125,6 +181,7 @@ public class Student implements Initializable{
         return list;
     }
 
+
     @FXML
     public void getSelectedR(MouseEvent event){
         index = Roomavailable.getSelectionModel().getSelectedIndex();
@@ -141,16 +198,18 @@ public class Student implements Initializable{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Book_room_form.fxml"));
         Book_room br1 = new Book_room(this.username, this.role, m, selectedid, this);
         loader.setController(br1);
-        m.popup(loader, "Booking", 395, 584, 650, 150);
+        m.popup(loader, "Booking", 600, 400, 650, 150);
     }
 
     @FXML
     void Modifyroom(ActionEvent event) {
-        
+
     }
 
     @FXML
     void Refresh(ActionEvent event) {
+        updateRoom();
+        Roomavailable.refresh();
 
     }
 

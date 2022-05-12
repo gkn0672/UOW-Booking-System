@@ -35,31 +35,39 @@
    <center>
       <AnchorPane prefHeight="600.0" prefWidth="1028.0" style="-fx-background-color: #0F52BA;" BorderPane.alignment="CENTER">
          <children>
-            <TableView layoutX="393.0" layoutY="53.0" prefHeight="258.0" prefWidth="677.0">
+            <TableView fx:id="Roomavailable" layoutX="14.0" layoutY="53.0" onMouseClicked="#getSelectedR" prefHeight="258.0" prefWidth="677.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
+                <TableColumn fx:id="RID" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="Rname" prefWidth="147.0" text="Room Name" />
+                  <TableColumn fx:id="Rdate" minWidth="0.0" prefWidth="143.0" text="Date" />
+                  <TableColumn fx:id="Rtime" prefWidth="86.0" text="Time" />
+                  <TableColumn fx:id="Rcapacity" prefWidth="139.0" text="Capacity" />
+                  <TableColumn fx:id="Rprice" prefWidth="86.0" text="Price" />
               </columns>
             </TableView>
-            <Button layoutX="268.0" layoutY="169.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="Book" />
-            <TableView layoutX="395.0" layoutY="362.0" prefHeight="230.0" prefWidth="677.0">
+            <Button fx:id="Bookbutton" layoutX="782.0" layoutY="97.0" mnemonicParsing="false" onAction="#Bookroom" prefHeight="26.0" prefWidth="106.0" text="Book" />
+            <TableView fx:id="Bookinglist" layoutX="14.0" layoutY="349.0" prefHeight="230.0" prefWidth="677.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="RID1" prefWidth="60.0" text="ID" />
+                <TableColumn fx:id="Rname1" prefWidth="112.0" text="Room Name" />
+                  <TableColumn fx:id="Rdate1" prefWidth="94.0" text="Date" />
+                  <TableColumn fx:id="Rtime1" prefWidth="94.0" text="Time" />
+                  <TableColumn fx:id="RDcode" prefWidth="158.0" text="Discount Code" />
+                  <TableColumn fx:id="RDprice" prefWidth="158.0" text="Price" />
               </columns>
             </TableView>
-            <Button layoutX="267.0" layoutY="463.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Modify" />
-            <Label alignment="CENTER" layoutX="393.0" layoutY="25.0" prefHeight="27.0" prefWidth="677.0" style="-fx-background-color: #FFFFFF;" text="Room available" textAlignment="CENTER">
+            <Button fx:id="Modifybutton" layoutX="781.0" layoutY="401.0" mnemonicParsing="false" onAction="#Modifyroom" prefHeight="26.0" prefWidth="107.0" text="Modify" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="26.0" prefHeight="27.0" prefWidth="677.0" style="-fx-background-color: #FFFFFF;" text="Room available" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="395.0" layoutY="334.0" prefHeight="27.0" prefWidth="677.0" style="-fx-background-color: #FFFFFF;" text="Booking list" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="14.0" layoutY="322.0" prefHeight="27.0" prefWidth="677.0" style="-fx-background-color: #FFFFFF;" text="Booking list" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
+            <Button fx:id="Refreshbutton" layoutX="781.0" layoutY="169.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="26.0" prefWidth="106.0" text="Refresh" />
          </children></AnchorPane>
    </center>
 </BorderPane>

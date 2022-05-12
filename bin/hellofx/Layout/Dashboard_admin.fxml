@@ -41,34 +41,53 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView layoutX="341.0" layoutY="54.0" prefHeight="490.0" prefWidth="738.0" AnchorPane.bottomAnchor="55.60000000000002" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0">
+            <TableView fx:id="Room" layoutX="14.0" layoutY="33.0" onMouseClicked="#getSelectedRoom" prefHeight="499.0" prefWidth="730.0" AnchorPane.bottomAnchor="68.0" AnchorPane.rightAnchor="336.0" AnchorPane.topAnchor="33.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn fx:id="RID" prefWidth="31.200013756752014" text="ID" />
+                <TableColumn fx:id="Rname" prefWidth="101.60002899169922" text="Room name" />
+                <TableColumn fx:id="Rdate" prefWidth="148.0" text="Date" />
+                  <TableColumn fx:id="Rtime" prefWidth="131.19998168945312" text="Time" />
+                  <TableColumn fx:id="Rcapacity" prefWidth="83.199951171875" text="Capacity" />
+                  <TableColumn fx:id="Rprice" prefWidth="121.60006713867188" text="Price" />
+                  <TableColumn fx:id="Rstatus" prefWidth="110.39999999999998" text="Status" />
               </columns>
             </TableView>
-            <Label alignment="CENTER" layoutX="341.0" layoutY="14.0" prefHeight="18.0" prefWidth="739.0" text="Room list" textAlignment="CENTER" AnchorPane.rightAnchor="0.0">
+            <Label alignment="CENTER" layoutX="9.0" layoutY="6.0" prefHeight="12.0" prefWidth="739.0" text="Room list" textAlignment="CENTER" AnchorPane.rightAnchor="331.79999999999995">
                <font>
-                  <Font size="28.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
-            <Button fx:id="Createbutton" layoutX="428.0" layoutY="559.0" mnemonicParsing="false" onAction="#Createroom" prefHeight="26.0" prefWidth="111.0" text="Create room" />
-            <Button layoutX="892.0" layoutY="559.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0" text="Modify room" />
-            <Button fx:id="Createpromobutton" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#Createpromo" prefHeight="26.0" prefWidth="92.0" text="New Promo" />
-            <TableView fx:id="table_promo" layoutX="14.0" layoutY="54.0" onMouseClicked="#getSelectedPromo" prefHeight="486.0" prefWidth="200.0">
+            <Button fx:id="Createbutton" layoutX="139.0" layoutY="546.0" mnemonicParsing="false" onAction="#Createroom" prefHeight="26.0" prefWidth="111.0" text="Create room" />
+            <Button fx:id="Modifyroom" layoutX="323.0" layoutY="546.0" mnemonicParsing="false" onAction="#Modify" prefHeight="26.0" prefWidth="111.0" text="Modify room" />
+            <Button fx:id="Createpromobutton" layoutX="817.0" layoutY="269.0" mnemonicParsing="false" onAction="#Createpromo" prefHeight="26.0" prefWidth="92.0" text="New Promo" />
+            <TableView fx:id="table_promo" layoutX="821.0" layoutY="33.0" onMouseClicked="#getSelectedPromo" prefHeight="223.0" prefWidth="194.0">
               <columns>
                 <TableColumn fx:id="col_promoname" prefWidth="97.59999084472656" text="Code name" />
                   <TableColumn fx:id="col_promovalue" prefWidth="101.5999755859375" text="Value" />
               </columns>
             </TableView>
-            <Button fx:id="Editpromo" layoutX="114.0" layoutY="559.0" mnemonicParsing="false" onAction="#Editpromo" prefHeight="26.0" prefWidth="92.0" text="Edit" />
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="197.0" text="Promocode">
+            <Button fx:id="Editpromo" layoutX="927.0" layoutY="269.0" mnemonicParsing="false" onAction="#Editpromo" prefHeight="26.0" prefWidth="92.0" text="Edit" />
+            <Label alignment="CENTER" layoutX="820.0" layoutY="-1.0" prefHeight="40.0" prefWidth="197.0" text="Promocode list">
                <font>
-                  <Font size="28.0" />
+                  <Font size="16.0" />
                </font>
             </Label>
             <Label fx:id="Promonameselected" layoutX="251.0" layoutY="120.0" text="Label" visible="false" />
             <Label fx:id="Promovalueselected" layoutX="251.0" layoutY="164.0" text="Label" visible="false" />
+            <TableView fx:id="Activepromo" layoutX="863.0" layoutY="335.0" onMouseClicked="#getSelectedActive" prefHeight="200.0" prefWidth="110.0">
+              <columns>
+                <TableColumn fx:id="Activecode" prefWidth="109.6000732421875" text="Active code" />
+              </columns>
+            </TableView>
+            <Button fx:id="addnewactive" layoutX="850.0" layoutY="543.0" mnemonicParsing="false" onAction="#AddActive" prefHeight="26.0" prefWidth="58.0" text="Add" />
+            <Button fx:id="Launchbutton" layoutX="484.0" layoutY="546.0" mnemonicParsing="false" onAction="#Launch" prefHeight="26.0" prefWidth="111.0" text="Launch" />
+            <Label fx:id="Idselected" alignment="CENTER" layoutX="793.0" layoutY="295.0" prefHeight="40.0" prefWidth="197.0" text="IDIDID" visible="false">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="CloseRoom" layoutX="632.0" layoutY="544.0" mnemonicParsing="false" onAction="#Closeroom" prefHeight="26.0" prefWidth="111.0" text="Close" />
+            <Button fx:id="Deleteactive" layoutX="927.0" layoutY="543.0" mnemonicParsing="false" onAction="#Deleteactive" prefHeight="26.0" prefWidth="58.0" text="Delete" />
          </children>
       </AnchorPane>
    </center>

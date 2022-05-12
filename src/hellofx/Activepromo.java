@@ -9,6 +9,10 @@ public class Activepromo {
         this.id = id;
     }
 
+    public Activepromo(String name){
+        this.name = name;
+    }
+
     public String getName(){
         return name;
     }

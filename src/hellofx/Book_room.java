@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +19,6 @@ public class Book_room extends Student{
     private Main m;
     private Student s;
     private int id;
-    
     public Book_room (String username, String role, Main m, int id, Student s){
         super(username, role);
         this.m = m;
@@ -57,7 +58,7 @@ public void Checkactive(ActionEvent event){
 }
 
 @FXML
-private ComboBox<String> Activelist;
+public ComboBox<String> Activelist;
 
 @FXML
 private Button Cancel;
@@ -69,7 +70,6 @@ private Button Confirmbooking;
 void Cancelbooking(ActionEvent event) throws Exception{
     cancel(Cancel);
 }
-
 
 
 @FXML
@@ -104,19 +104,20 @@ void Confirmbooking(ActionEvent event) throws Exception{
     afterDiscount = 100 - promoCode;
     discountPrice = (afterDiscount * originalPrice) / 100;
 
-    //Update the discountprice in the database
-    ps3 = con.prepareStatement("UPDATE `room` SET `discountPrice` = ? WHERE `ID` = ?");
-    ps3.setDouble(1,discountPrice);
-    ps3.setString(2, String.valueOf(id));
-    ps3.execute();
-
-
     
     //Set selected room status to "Unavailable"
     ps = con.prepareStatement("UPDATE `room` SET `Status` = ? WHERE `ID` = ?");
     ps.setString(1, "Not available");
     ps.setString(2, String.valueOf(id));
     ps.execute();
+
+    //Insert data into booking table
+    ps3 = con.prepareStatement("INSERT INTO `booking` (`RID`, `uname`, `Code_name`, `discountPrice`) VALUES (?, ?, ?, ?)");
+    ps3.setString(1, String.valueOf(s.selectedid));
+    ps3.setString(2,s.username);
+    ps3.setString(3, Activelist.getValue());
+    ps3.setString(4, String.valueOf(discountPrice));
+    ps3.execute();
 
     //Update room available
     if(ps.executeUpdate() != 0){

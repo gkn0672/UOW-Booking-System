@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 //Object class
-public class Room {
+public class Room{
     private int id;
     private String name;
     private String date;
@@ -32,6 +32,7 @@ public class Room {
 
         this.timeset = timeset;
     }
+
 
     //get room id
     public int getId(){

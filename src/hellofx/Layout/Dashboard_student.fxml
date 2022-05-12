@@ -46,14 +46,14 @@
               </columns>
             </TableView>
             <Button fx:id="Bookbutton" layoutX="782.0" layoutY="97.0" mnemonicParsing="false" onAction="#Bookroom" prefHeight="26.0" prefWidth="106.0" text="Book" />
-            <TableView layoutX="14.0" layoutY="349.0" prefHeight="230.0" prefWidth="677.0">
+            <TableView fx:id="Bookinglist" layoutX="14.0" layoutY="349.0" prefHeight="230.0" prefWidth="677.0">
               <columns>
                 <TableColumn fx:id="RID1" prefWidth="60.0" text="ID" />
-                <TableColumn prefWidth="112.0" text="Room Name" />
-                  <TableColumn prefWidth="94.0" text="Date" />
-                  <TableColumn prefWidth="94.0" text="Time" />
-                  <TableColumn prefWidth="158.0" text="Discount Code" />
-                  <TableColumn prefWidth="158.0" text="Price" />
+                <TableColumn fx:id="Rname1" prefWidth="112.0" text="Room Name" />
+                  <TableColumn fx:id="Rdate1" prefWidth="94.0" text="Date" />
+                  <TableColumn fx:id="Rtime1" prefWidth="94.0" text="Time" />
+                  <TableColumn fx:id="RDcode" prefWidth="158.0" text="Discount Code" />
+                  <TableColumn fx:id="RDprice" prefWidth="158.0" text="Price" />
               </columns>
             </TableView>
             <Button fx:id="Modifybutton" layoutX="781.0" layoutY="401.0" mnemonicParsing="false" onAction="#Modifyroom" prefHeight="26.0" prefWidth="107.0" text="Modify" />
