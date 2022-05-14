@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
+import javax.lang.model.util.ElementScanner6;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +38,7 @@ public void initialize(URL arg0, ResourceBundle arg1){
         while(rs.next()){
             Activelist.getItems().add(rs.getString(1));
         }
-        Confirmbooking.setDisable(true);
+        Confirmbooking.setDisable(false);
     }
     catch(Exception e){
         e.printStackTrace();
@@ -89,7 +91,6 @@ void Confirmbooking(ActionEvent event) throws Exception{
     if(rs.next()){
         promoCode = rs.getInt(1);
     }
-
     //Get original price
     ps2 = con.prepareStatement("SELECT * FROM `room` WHERE `ID` = ?");
     ps2.setString(1, String.valueOf(id));
@@ -113,8 +114,16 @@ void Confirmbooking(ActionEvent event) throws Exception{
     ps3 = con.prepareStatement("INSERT INTO `booking` (`RID`, `uname`, `Code_name`, `discountPrice`) VALUES (?, ?, ?, ?)");
     ps3.setString(1, String.valueOf(s.selectedid));
     ps3.setString(2, s.username);
-    ps3.setString(3, Activelist.getValue());
-    ps3.setString(4, String.valueOf(discountPrice));
+    if(Activelist.getItems() == null) {
+        ps3.setString(3,"N/A");
+        ps3.setString(4,String.valueOf(originalPrice));
+    }
+    else
+    {
+        ps3.setString(3, Activelist.getValue());
+        ps3.setString(4, String.valueOf(discountPrice));
+    }
+    
     ps3.execute();
 
     //Update room available
