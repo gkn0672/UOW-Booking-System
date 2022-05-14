@@ -95,7 +95,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="Createpromobutton" layoutX="430.0" layoutY="490.0" mnemonicParsing="false" onAction="#Createpromo" prefHeight="29.0" prefWidth="124.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5px; -fx-border-color: #0052f5;" text="New " textFill="#0052f5">
+            <Button fx:id="Createpromobutton" layoutX="92.0" layoutY="490.0" mnemonicParsing="false" onAction="#Createpromo" prefHeight="29.0" prefWidth="124.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5px; -fx-border-color: #0052f5;" text="New " textFill="#0052f5">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -127,7 +127,7 @@
                      </image></ImageView>
                </graphic>
             </Button>
-            <Button fx:id="addnewactive" layoutX="92.0" layoutY="490.0" mnemonicParsing="false" onAction="#AddActive" prefHeight="29.0" prefWidth="124.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5px; -fx-border-color: #0052f5;" text="Add" textFill="#0052f5">
+            <Button fx:id="addnewactive" layoutX="453.0" layoutY="491.0" mnemonicParsing="false" onAction="#AddActive" prefHeight="29.0" prefWidth="124.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5px; -fx-border-color: #0052f5;" text="Add" textFill="#0052f5">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -173,7 +173,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="Deleteactive" layoutX="564.0" layoutY="490.0" mnemonicParsing="false" onAction="#Deleteactive" prefHeight="29.0" prefWidth="124.0" style="-fx-border-color: #0052f5; -fx-border-radius: 5px; -fx-background-color: #ffffff;" text="Delete" textFill="#0052f5">
+            <Button fx:id="Deleteactive" layoutX="589.0" layoutY="491.0" mnemonicParsing="false" onAction="#Deleteactive" prefHeight="29.0" prefWidth="124.0" style="-fx-border-color: #0052f5; -fx-border-radius: 5px; -fx-background-color: #ffffff;" text="Delete" textFill="#0052f5">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
