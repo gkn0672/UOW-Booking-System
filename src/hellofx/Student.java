@@ -104,17 +104,14 @@ public class Student implements Initializable{
         updateRoom();
         Modifybutton.setDisable(true);
         Bookbutton.setDisable(true);
-        
-        RDcode.setCellValueFactory(cellData -> new ReadOnlyStringWrapper("hi"));
-        Bookinglist.refresh();
     }
     
     public void updateBookingList(){
         RID1.setCellValueFactory(new PropertyValueFactory<Bookinglist, Integer>("id"));
-        Rname1.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("Rname"));
+        Rname1.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("name"));
         Rdate1.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("date"));
         Rtime1.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("time"));
-        RDcode.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("RDCode"));
+        RDcode.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("code"));
         RDprice.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("price"));
         ListA = getDataRoomBooking(selectedid);
         Bookinglist.setItems(ListA);
@@ -131,6 +128,7 @@ public class Student implements Initializable{
         Rprice.setCellValueFactory(new PropertyValueFactory<Room, Double>("price"));
         listR = getDataRoom();
         Roomavailable.setItems(listR);
+        Roomavailable.refresh();
     }
 
     public ObservableList<Bookinglist> getDataRoomBooking(int index){
@@ -138,17 +136,17 @@ public class Student implements Initializable{
         Connection con = m.getC().getConnection();
         ObservableList<Bookinglist> list = FXCollections.observableArrayList();
         try{
-            PreparedStatement ps = con.prepareStatement("SELECT room.ID, room.RoomNum, room.BlkNum, room.Floor, room.Date, room.Time, room.Timeset, booking.Code_name, booking.discountPrice FROM `room` INNER JOIN `booking` ON room.ID = booking.RID WHERE `ID` = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT room.ID, room.BlkNum, room.Floor, room.RoomNum, room.Date, room.Time, room.Timeset, booking.Code_name, booking.discountPrice FROM `room` LEFT JOIN `booking` ON room.ID = booking.RID WHERE `ID` = ?");
             ps.setString(1,String.valueOf(index));
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                list.add(new Bookinglist(rs.getInt("room.ID"), 
-                                String.format("%s.%s.%s", rs.getString("room.BlkNum"), rs.getString("room.Floor"), rs.getString("room.RoomNum")), 
-                                rs.getString("room.Date"), 
-                                rs.getString("room.Time"),
-                                rs.getString("booking.Code_name"),
-                                rs.getString("booking.discountPrice"),
-                                rs.getString("room.Timeset")));
+                list.add(new Bookinglist(rs.getInt("ID"), 
+                                String.format("%s.%s.%s", rs.getString("BlkNum"), rs.getString("Floor"), rs.getString("RoomNum")), 
+                                rs.getString("Date"), 
+                                rs.getString("Time"),
+                                rs.getString("Code_name"),
+                                rs.getString("discountPrice"),
+                                rs.getString("Timeset")));
             }
         }
         catch(Exception e){
@@ -162,7 +160,8 @@ public class Student implements Initializable{
         Connection con = m.getC().getConnection();
         ObservableList<Room> list = FXCollections.observableArrayList();
         try{
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM room");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM room WHERE `Status` = ?");
+            ps.setString(1, "Available");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 list.add(new Room(rs.getInt("ID"), 

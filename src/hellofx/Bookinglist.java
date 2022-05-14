@@ -5,31 +5,31 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Bookinglist {
-    private int Rid;
+    private int id;
     private String Rname;
     private String date; 
     private String time;
-    private String DCode;
+    private String code;
     private String timeset;
     private String price;
 
     //Constructor
-    public Bookinglist(int Rid, String Rname, String date, String time, String DCode, String price, String timeset)throws ParseException{
-        this.Rid = Rid;
+    public Bookinglist(int id, String Rname, String date, String time, String code, String price, String timeset)throws ParseException{
+        this.id = id;
         this.Rname = Rname;
         this.date = getDateFormat(date);
         this.time = getTimeFormat(time) + " " + timeset;
-        this.DCode = DCode;
+        this.code = code;
         this.price = price;
         this.timeset = timeset;
 
     }
 
     public int getId(){
-        return Rid;
+        return id;
     }
 
-    public String getRoomname(){
+    public String getName(){
         return Rname;
     }
 
@@ -41,8 +41,8 @@ public class Bookinglist {
         return time;
     }
 
-    public String getDiscountcode(){
-        return DCode;
+    public String getCode(){
+        return code;
     }
 
     public String getTimeset(){
