@@ -102,6 +102,8 @@ public class Student implements Initializable{
         Srole.setText("UOW "+role);
 
         updateRoom();
+        updateBookingList();
+        
         Modifybutton.setDisable(true);
         Bookbutton.setDisable(true);
     }
@@ -136,8 +138,8 @@ public class Student implements Initializable{
         Connection con = m.getC().getConnection();
         ObservableList<Bookinglist> list = FXCollections.observableArrayList();
         try{
-            PreparedStatement ps = con.prepareStatement("SELECT room.ID, room.BlkNum, room.Floor, room.RoomNum, room.Date, room.Time, room.Timeset, booking.Code_name, booking.discountPrice FROM `room` LEFT JOIN `booking` ON room.ID = booking.RID WHERE `ID` = ?");
-            ps.setString(1,String.valueOf(index));
+            PreparedStatement ps = con.prepareStatement("SELECT room.ID, room.BlkNum, room.Floor, room.RoomNum, room.Date, room.Time, room.Timeset, booking.Code_name, booking.discountPrice, booking.uname FROM `room` LEFT JOIN `booking` ON room.ID = booking.RID WHERE `uname` = ?");
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 list.add(new Bookinglist(rs.getInt("ID"), 

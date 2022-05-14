@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -105,16 +103,16 @@ void Confirmbooking(ActionEvent event) throws Exception{
     discountPrice = (afterDiscount * originalPrice) / 100;
 
     
-    //Set selected room status to "Unavailable"
+    //Set selected room status to "Booked"
     ps = con.prepareStatement("UPDATE `room` SET `Status` = ? WHERE `ID` = ?");
-    ps.setString(1, "Not available");
+    ps.setString(1, "Booked");
     ps.setString(2, String.valueOf(id));
     ps.execute();
 
     //Insert data into booking table
     ps3 = con.prepareStatement("INSERT INTO `booking` (`RID`, `uname`, `Code_name`, `discountPrice`) VALUES (?, ?, ?, ?)");
     ps3.setString(1, String.valueOf(s.selectedid));
-    ps3.setString(2,s.username);
+    ps3.setString(2, s.username);
     ps3.setString(3, Activelist.getValue());
     ps3.setString(4, String.valueOf(discountPrice));
     ps3.execute();
