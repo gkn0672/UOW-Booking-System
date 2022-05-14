@@ -116,7 +116,7 @@
                   <TableColumn fx:id="col_promovalue" prefWidth="96.80000610351561" text="Value" />
               </columns>
             </TableView>
-            <Button fx:id="Editpromo" layoutX="577.0" layoutY="490.0" mnemonicParsing="false" onAction="#Editpromo" prefHeight="29.0" prefWidth="124.0" style="-fx-border-color: #0052f5; -fx-border-radius: 5px; -fx-background-color: #ffffff;" text="Edit" textFill="#0052f5">
+            <Button fx:id="Editpromo" layoutX="224.0" layoutY="490.0" mnemonicParsing="false" onAction="#Editpromo" prefHeight="29.0" prefWidth="124.0" style="-fx-border-color: #0052f5; -fx-border-radius: 5px; -fx-background-color: #ffffff;" text="Edit" textFill="#0052f5">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -173,7 +173,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="Deleteactive" layoutX="232.0" layoutY="490.0" mnemonicParsing="false" onAction="#Deleteactive" prefHeight="29.0" prefWidth="124.0" style="-fx-border-color: #0052f5; -fx-border-radius: 5px; -fx-background-color: #ffffff;" text="Delete" textFill="#0052f5">
+            <Button fx:id="Deleteactive" layoutX="564.0" layoutY="490.0" mnemonicParsing="false" onAction="#Deleteactive" prefHeight="29.0" prefWidth="124.0" style="-fx-border-color: #0052f5; -fx-border-radius: 5px; -fx-background-color: #ffffff;" text="Delete" textFill="#0052f5">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
