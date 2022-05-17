@@ -5,6 +5,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.mysql.cj.protocol.Resultset;
@@ -16,16 +17,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class Student implements Initializable{
     public String username;
+    private Main m;
     private String role;
     protected int selectedid;
     ObservableList<Room> listR = FXCollections.observableArrayList();
@@ -48,6 +53,9 @@ public class Student implements Initializable{
 
     @FXML
     private Button Modifybutton;
+
+    @FXML
+    private Button Cancelbutton;
 
     @FXML
     private TableColumn<Room, Integer> RID;
@@ -106,6 +114,7 @@ public class Student implements Initializable{
         
         Modifybutton.setDisable(true);
         Bookbutton.setDisable(true);
+        Cancelbutton.setDisable(true);
     }
     
     public void updateBookingList(){
@@ -215,6 +224,7 @@ public class Student implements Initializable{
         }
         selectedid = RID1.getCellData(index);
         Modifybutton.setDisable(false);
+        Cancelbutton.setDisable(false);
     }
     
     @FXML
@@ -233,10 +243,42 @@ public class Student implements Initializable{
         Modify_booking mb1 = new Modify_booking(this.username, this.role, m, this, selectedid);
         loader.setController(mb1);
         m.popup(loader, "Modify Booking", 395, 609, 650, 150);
+    }
 
+    @FXML
+    void Cancelbooking(ActionEvent event) throws Exception{
+        Main m = new Main();
+        Connection con = m.getC().getConnection();
+        int id = selectedid;
 
+        // create a alert
+        Alert a = new Alert(AlertType.CONFIRMATION);
+        a.setTitle("Cancel booking");
+        a.setHeaderText("Are you sure you want to cancel booking?");
+        Optional<ButtonType> result = a.showAndWait();
+
+        if(!result.isPresent())
+            // alert is exited, no button has been pressed.
+        if(result.get() == ButtonType.OK)
+            //ok button is pressed
+            //Delete data from booking list
+            Bookinglist.getItems().clear();
+            
+            //Delete room from booking table
+            ps = con.prepareStatement("DELETE FROM `booking` WHERE `RID` = ?");
+            ps.setInt(1,selectedid);
+            ps.execute();
+
+            //Set room to be available
+            ps = con.prepareStatement("UPDATE `room` SET `Status` = ? WHERE `ID` = ?");
+            ps.setString(1, "Available");
+            ps.setInt(2,selectedid);
+            ps.execute();
+            updateModifyBookingList(selectedid);
+            updateRoom();
 
     }
+
 
     @FXML
     void Refresh(ActionEvent event) {

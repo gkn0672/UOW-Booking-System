@@ -67,6 +67,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <Button fx:id="Cancelbutton" layoutX="782.0" layoutY="451.0" mnemonicParsing="false" onAction="#Cancelbooking" prefHeight="26.0" prefWidth="107.0" text="Cancel " />
             <Button fx:id="Refreshbutton" layoutX="781.0" layoutY="169.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="26.0" prefWidth="106.0" text="Refresh" />
          </children></AnchorPane>
    </center>
