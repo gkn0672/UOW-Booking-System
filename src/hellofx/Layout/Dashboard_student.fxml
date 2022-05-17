@@ -46,7 +46,7 @@
               </columns>
             </TableView>
             <Button fx:id="Bookbutton" layoutX="782.0" layoutY="97.0" mnemonicParsing="false" onAction="#Bookroom" prefHeight="26.0" prefWidth="106.0" text="Book" />
-            <TableView fx:id="Bookinglist" layoutX="14.0" layoutY="349.0" prefHeight="230.0" prefWidth="677.0">
+            <TableView fx:id="Bookinglist" layoutX="14.0" layoutY="349.0" onMouseClicked="#getSelectedL" prefHeight="230.0" prefWidth="677.0">
               <columns>
                 <TableColumn fx:id="RID1" prefWidth="60.0" text="ID" />
                 <TableColumn fx:id="Rname1" prefWidth="112.0" text="Room Name" />

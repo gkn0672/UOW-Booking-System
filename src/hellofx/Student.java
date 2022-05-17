@@ -78,7 +78,7 @@ public class Student implements Initializable{
     private TableView<Room> Roomavailable;
 
     @FXML
-    private TableView<Bookinglist> Bookinglist;
+    protected TableView<Bookinglist> Bookinglist;
 
     @FXML
     private TableColumn<Room, Double> Rprice;
@@ -121,6 +121,19 @@ public class Student implements Initializable{
 
     }
 
+    public void updateModifyBookingList(int index){
+        RID1.setCellValueFactory(new PropertyValueFactory<Bookinglist, Integer>("id"));
+        Rname1.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("name"));
+        Rdate1.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("date"));
+        Rtime1.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("time"));
+        RDcode.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("code"));
+        RDprice.setCellValueFactory(new PropertyValueFactory<Bookinglist, String>("price"));
+        ListA = getDataRoomBooking(selectedid);
+        Bookinglist.setItems(ListA);
+        Bookinglist.refresh();
+
+    }
+
     public void updateRoom(){
         RID.setCellValueFactory(new PropertyValueFactory<Room, Integer>("id"));
         Rname.setCellValueFactory(new PropertyValueFactory<Room, String>("name"));
@@ -138,8 +151,9 @@ public class Student implements Initializable{
         Connection con = m.getC().getConnection();
         ObservableList<Bookinglist> list = FXCollections.observableArrayList();
         try{
-            PreparedStatement ps = con.prepareStatement("SELECT room.ID, room.BlkNum, room.Floor, room.RoomNum, room.Date, room.Time, room.Timeset, booking.Code_name, booking.discountPrice, booking.uname FROM `room` LEFT JOIN `booking` ON room.ID = booking.RID WHERE `uname` = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT room.ID, room.BlkNum, room.Floor, room.RoomNum, room.Date, room.Time, room.Timeset, booking.Code_name, room.Status, booking.discountPrice, booking.uname FROM `room` LEFT JOIN `booking` ON room.ID = booking.RID WHERE `uname` = ? AND room.Status = ?");
             ps.setString(1, username);
+            ps.setString(2, "Booked");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 list.add(new Bookinglist(rs.getInt("ID"), 
@@ -192,6 +206,16 @@ public class Student implements Initializable{
         selectedid = RID.getCellData(index);
         Bookbutton.setDisable(false);
     }
+
+    @FXML
+    public void getSelectedL(MouseEvent event){
+        index = Bookinglist.getSelectionModel().getSelectedIndex();
+        if(index <= -1){
+            return;
+        }
+        selectedid = RID1.getCellData(index);
+        Modifybutton.setDisable(false);
+    }
     
     @FXML
     void Bookroom(ActionEvent event) throws IOException {
@@ -203,7 +227,14 @@ public class Student implements Initializable{
     }
 
     @FXML
-    void Modifyroom(ActionEvent event) {
+    void Modifyroom(ActionEvent event) throws Exception {
+        Main m = new Main();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Modify_room.fxml"));
+        Modify_booking mb1 = new Modify_booking(this.username, this.role, m, this, selectedid);
+        loader.setController(mb1);
+        m.popup(loader, "Modify Booking", 395, 609, 650, 150);
+
+
 
     }
 
@@ -211,7 +242,7 @@ public class Student implements Initializable{
     void Refresh(ActionEvent event) {
         updateRoom();
         Roomavailable.refresh();
-
+        Bookinglist.refresh();
     }
 
     @FXML

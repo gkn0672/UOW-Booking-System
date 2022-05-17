@@ -27,9 +27,9 @@
               <tabs>
                 <Tab text="Room available">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #291778;">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="657.0" style="-fx-border-color: #291778;">
                            <children>
-                              <TableView layoutX="14.0" layoutY="10.0" prefHeight="298.0" prefWidth="688.0">
+                              <TableView layoutX="14.0" layoutY="10.0" prefHeight="266.0" prefWidth="686.0">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="1" />
                                   <TableColumn prefWidth="74.0" text="2" />
@@ -40,8 +40,8 @@
                                     <TableColumn prefWidth="74.0" text="5" />
                                 </columns>
                               </TableView>
-                              <Button layoutX="631.0" layoutY="14.0" mnemonicParsing="false" text="do that" />
-                              <Button layoutX="559.0" layoutY="14.0" mnemonicParsing="false" text="do this" />
+                              <Button layoutX="102.0" layoutY="306.0" mnemonicParsing="false" text="do that" />
+                              <Button layoutX="27.0" layoutY="306.0" mnemonicParsing="false" text="do this" />
                            </children>
                         </AnchorPane>
                   </content>

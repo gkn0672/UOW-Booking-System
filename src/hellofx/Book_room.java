@@ -103,13 +103,6 @@ void Confirmbooking(ActionEvent event) throws Exception{
     afterDiscount = 100 - promoCode;
     discountPrice = (afterDiscount * originalPrice) / 100;
 
-    
-    //Set selected room status to "Booked"
-    ps = con.prepareStatement("UPDATE `room` SET `Status` = ? WHERE `ID` = ?");
-    ps.setString(1, "Booked");
-    ps.setString(2, String.valueOf(id));
-    ps.execute();
-
     //Insert data into booking table
     ps3 = con.prepareStatement("INSERT INTO `booking` (`RID`, `uname`, `Code_name`, `discountPrice`) VALUES (?, ?, ?, ?)");
     ps3.setString(1, String.valueOf(s.selectedid));
@@ -125,6 +118,12 @@ void Confirmbooking(ActionEvent event) throws Exception{
     }
     
     ps3.execute();
+
+    //Set selected room status to "Booked"
+    ps = con.prepareStatement("UPDATE `room` SET `Status` = ? WHERE `ID` = ?");
+    ps.setString(1, "Booked");
+    ps.setString(2, String.valueOf(id));
+    ps.execute();
 
     //Update room available
     if(ps.executeUpdate() != 0){
