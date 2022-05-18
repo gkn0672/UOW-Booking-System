@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -69,7 +71,7 @@ public class Edit_room  extends Admin {
 
     @FXML DatePicker Date;
 
-    @FXML LimitedTextField Price = new LimitedTextField();
+    @FXML TextField Price;
 
     @FXML TextField Roomnumber;
     @FXML TextField Capacity;
@@ -104,7 +106,6 @@ public class Edit_room  extends Admin {
         Min.setItems(RMin);
 
         Price.setText(price);
-        Price.Restrictprice();
 
         LocalDate thedate = LocalDate.parse(rdate);
         Date.setValue(thedate);
@@ -229,6 +230,23 @@ public class Edit_room  extends Admin {
         }
     }
 
+    public void ValidatePrice(KeyEvent event){
+        final Pattern pattern = Pattern.compile("(\\d{1,2}\\.\\d{1,2})");
+        TextFormatter<?> formatter = new TextFormatter<>(change -> {
+            if (pattern.matcher(change.getControlNewText()).matches()) {
+                Editroomerror.setVisible(false);
+                Confirmedit.setDisable(false);
+             return change; 
+            } else {
+                Editroomerror.setText("Invalid input");
+                Editroomerror.setVisible(true);
+                Confirmedit.setDisable(true);
+            return change; 
+            }
+         });
+        Price.setTextFormatter(formatter);
+    }
+    
     public void getData() throws SQLException{
         Connection con = m.getC().getConnection();
         PreparedStatement ps;
