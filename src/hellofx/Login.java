@@ -73,7 +73,7 @@ public class Login {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Dashboard_student.fxml"));
                         Student scontroller = new Student(Username.getText(), role);  
                         loader.setController(scontroller);
-                        m.createScene(loader, "UOW dashboard (student version)", 1280, 600, 200, 50);
+                        m.createScene(loader, "UOW dashboard (student version)", 744, 544, 450, 50);
                     }
 
                 }else{

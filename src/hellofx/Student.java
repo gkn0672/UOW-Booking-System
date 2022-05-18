@@ -21,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
@@ -50,7 +51,12 @@ public class Student implements Initializable{
     @FXML
     private Button Bookbutton;
 
+    @FXML
+    private Tab tab1;
 
+    @FXML
+    private Tab tab2;
+    
     @FXML
     private Button Modifybutton;
 

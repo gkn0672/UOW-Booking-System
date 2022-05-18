@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -10,65 +13,107 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <left>
-      <AnchorPane prefHeight="524.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="249.0" prefWidth="795.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="Susername" alignment="CENTER" layoutY="181.0" prefHeight="26.0" prefWidth="200.0" text="Welcome, ####!" textAlignment="CENTER" textFill="#001641">
-               <font>
-                  <Font size="17.0" />
-               </font></Label>
-            <Label fx:id="Srole" alignment="CENTER" layoutY="208.0" prefHeight="26.0" prefWidth="200.0" text="Your role: ####" textAlignment="CENTER" textFill="#001641">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Button fx:id="Lgnoutbutton" layoutX="26.0" layoutY="529.0" mnemonicParsing="false" onAction="#Stulogout" prefHeight="26.0" prefWidth="148.0" style="-fx-background-color: #0F52BA;" text="Log Out" textFill="WHITE" />
-            <ImageView fitHeight="200.0" fitWidth="140.0" layoutX="30.0">
+            <ImageView fitHeight="76.0" fitWidth="207.0" layoutX="36.0" layoutY="33.0" preserveRatio="true">
                <image>
-                  <Image url="@../Image/UOW_original.png" />
+                  <Image url="@../../../../../CSIT214%20grp%20prj%20other%20doc/final/UOW%20logo.png" />
                </image>
             </ImageView>
+          <Button fx:id="Lgnoutbutton" layoutX="622.0" layoutY="24.0" minWidth="39.0" mnemonicParsing="false" onAction="#Stulogout" prefHeight="28.0" prefWidth="94.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5px; -fx-border-color: #0052f5;" text="Log out" textFill="#48494a" textOverrun="CLIP">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="18.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../CSIT214%20grp%20prj%20other%20doc/final/logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <TabPane layoutX="14.0" layoutY="135.0" prefHeight="389.0" prefWidth="719.0" style="-fx-border-color: #291778;" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="tab1" text="Room available">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #291778;">
+                           <children>
+                              <TableView fx:id="Roomavailable" layoutX="14.0" layoutY="17.0" onMouseClicked="#getSelectedR" prefHeight="291.0" prefWidth="688.0">
+                                <columns>
+                                  <TableColumn fx:id="RID" prefWidth="75.0" text="ID" />
+                                  <TableColumn fx:id="Rname" prefWidth="112.0" text="Room Name" />
+                                    <TableColumn fx:id="Rdate" prefWidth="131.0" text="Date" />
+                                    <TableColumn fx:id="Rtime" prefWidth="133.0" text="Time" />
+                                    <TableColumn fx:id="Rcapacity" prefWidth="111.0" text="Capacity" />
+                                    <TableColumn fx:id="Rprice" prefWidth="125.0" text="Price" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="Refreshbutton" layoutX="588.0" layoutY="315.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="34.0" prefWidth="113.0" style="-fx-background-color: #ffffff; -fx-border-color: #0052f5; -fx-border-radius: 5px;" text="Refresh" textFill="#0052f5" />
+                              <ImageView fitHeight="27.0" fitWidth="23.0" layoutX="598.0" layoutY="321.0" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Image/refresh.jpg" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="Bookbutton" layoutX="465.0" layoutY="315.0" mnemonicParsing="false" onAction="#Bookroom" prefHeight="34.0" prefWidth="112.0" style="-fx-background-color: #ffffff; -fx-border-color: #0052f5; -fx-border-radius: 5px;" text="Book" textFill="#0052f5" />
+                              <ImageView fitHeight="28.0" fitWidth="22.0" layoutX="475.0" layoutY="321.0" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Image/add.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="tab2" text="Booking List">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="232.0" prefWidth="609.0">
+                           <children>
+                              <TableView fx:id="Bookinglist" layoutX="13.0" layoutY="15.0" onMouseClicked="#getSelectedL" prefHeight="297.0" prefWidth="691.0">
+                                <columns>
+                                  <TableColumn fx:id="RID1" prefWidth="77.0" text="ID" />
+                                  <TableColumn fx:id="Rname1" prefWidth="95.0" text="Room Name" />
+                                    <TableColumn fx:id="Rdate1" prefWidth="128.0" text="Date" />
+                                    <TableColumn fx:id="Rtime1" prefWidth="135.0" text="Time" />
+                                    <TableColumn fx:id="RDcode" prefWidth="128.0" text="Discount Code" />
+                                    <TableColumn fx:id="RDprice" prefWidth="125.5999755859375" text="Price" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="Modifybutton" layoutX="463.0" layoutY="322.0" mnemonicParsing="false" onAction="#Modifyroom" prefHeight="31.0" prefWidth="114.0" style="-fx-background-color: #ffffff; -fx-border-color: #0052f5; -fx-border-radius: 5px;" text="Modify" textFill="#0052f5" />
+                              <ImageView fitHeight="23.0" fitWidth="21.0" layoutX="472.0" layoutY="327.0" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Image/new.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="Cancelbutton" layoutX="590.0" layoutY="322.0" mnemonicParsing="false" onAction="#Cancelbooking" prefHeight="31.0" prefWidth="113.0" style="-fx-background-color: #ffffff; -fx-border-color: #0052f5; -fx-border-radius: 5px;" text="Cancel " textFill="#0052f5" />
+                              <ImageView fitHeight="25.0" fitWidth="21.0" layoutX="601.0" layoutY="327.0" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Image/close.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            <Label fx:id="Susername" alignment="CENTER" layoutX="308.0" layoutY="44.0" prefHeight="26.0" prefWidth="190.0" text="####!" textAlignment="CENTER" textFill="#0e1772">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="Srole" alignment="CENTER" layoutX="347.0" layoutY="72.0" prefHeight="26.0" prefWidth="113.0" text="####" textAlignment="CENTER" textFill="#0e1772">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="admin_role" layoutX="365.0" layoutY="76.0" prefHeight="18.0" prefWidth="78.0" text="&lt;role here&gt;" visible="false" />
+            <Label fx:id="admin_username" layoutX="460.0" layoutY="73.0" prefHeight="24.0" prefWidth="164.0" text="username here" visible="false" />
          </children>
       </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </AnchorPane>
    </left>
-   <center>
-      <AnchorPane prefHeight="600.0" prefWidth="1028.0" style="-fx-background-color: #0F52BA;" BorderPane.alignment="CENTER">
-         <children>
-            <TableView fx:id="Roomavailable" layoutX="14.0" layoutY="53.0" onMouseClicked="#getSelectedR" prefHeight="258.0" prefWidth="677.0">
-              <columns>
-                <TableColumn fx:id="RID" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="Rname" prefWidth="147.0" text="Room Name" />
-                  <TableColumn fx:id="Rdate" minWidth="0.0" prefWidth="143.0" text="Date" />
-                  <TableColumn fx:id="Rtime" prefWidth="86.0" text="Time" />
-                  <TableColumn fx:id="Rcapacity" prefWidth="139.0" text="Capacity" />
-                  <TableColumn fx:id="Rprice" prefWidth="86.0" text="Price" />
-              </columns>
-            </TableView>
-            <Button fx:id="Bookbutton" layoutX="782.0" layoutY="97.0" mnemonicParsing="false" onAction="#Bookroom" prefHeight="26.0" prefWidth="106.0" text="Book" />
-            <TableView fx:id="Bookinglist" layoutX="14.0" layoutY="349.0" onMouseClicked="#getSelectedL" prefHeight="230.0" prefWidth="677.0">
-              <columns>
-                <TableColumn fx:id="RID1" prefWidth="60.0" text="ID" />
-                <TableColumn fx:id="Rname1" prefWidth="112.0" text="Room Name" />
-                  <TableColumn fx:id="Rdate1" prefWidth="94.0" text="Date" />
-                  <TableColumn fx:id="Rtime1" prefWidth="94.0" text="Time" />
-                  <TableColumn fx:id="RDcode" prefWidth="158.0" text="Discount Code" />
-                  <TableColumn fx:id="RDprice" prefWidth="158.0" text="Price" />
-              </columns>
-            </TableView>
-            <Button fx:id="Modifybutton" layoutX="781.0" layoutY="401.0" mnemonicParsing="false" onAction="#Modifyroom" prefHeight="26.0" prefWidth="107.0" text="Modify" />
-            <Label alignment="CENTER" layoutX="14.0" layoutY="26.0" prefHeight="27.0" prefWidth="677.0" style="-fx-background-color: #FFFFFF;" text="Room available" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="322.0" prefHeight="27.0" prefWidth="677.0" style="-fx-background-color: #FFFFFF;" text="Booking list" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Button fx:id="Cancelbutton" layoutX="782.0" layoutY="451.0" mnemonicParsing="false" onAction="#Cancelbooking" prefHeight="26.0" prefWidth="107.0" text="Cancel " />
-            <Button fx:id="Refreshbutton" layoutX="781.0" layoutY="169.0" mnemonicParsing="false" onAction="#Refresh" prefHeight="26.0" prefWidth="106.0" text="Refresh" />
-         </children></AnchorPane>
-   </center>
 </BorderPane>
