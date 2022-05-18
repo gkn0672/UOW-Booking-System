@@ -249,7 +249,6 @@ public class Student implements Initializable{
     void Cancelbooking(ActionEvent event) throws Exception{
         Main m = new Main();
         Connection con = m.getC().getConnection();
-        int id = selectedid;
 
         // create a alert
         Alert a = new Alert(AlertType.CONFIRMATION);
@@ -257,9 +256,12 @@ public class Student implements Initializable{
         a.setHeaderText("Are you sure you want to cancel booking?");
         Optional<ButtonType> result = a.showAndWait();
 
-        if(!result.isPresent())
-            // alert is exited, no button has been pressed.
-        if(result.get() == ButtonType.OK)
+        if(!result.isPresent( ) &&  result.get()  == ButtonType.CANCEL)
+        {
+            System.out.println("Cancelled");
+        }
+        else if(result.get() == ButtonType.OK)
+        {
             //ok button is pressed
             //Delete data from booking list
             Bookinglist.getItems().clear();
@@ -276,9 +278,8 @@ public class Student implements Initializable{
             ps.execute();
             updateModifyBookingList(selectedid);
             updateRoom();
-
+        }
     }
-
 
     @FXML
     void Refresh(ActionEvent event) {
