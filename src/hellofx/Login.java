@@ -1,5 +1,6 @@
 package hellofx;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
 import java.sql.*;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime; 
 
 public class Login {
     //Constructor
@@ -53,12 +57,19 @@ public class Login {
             Connection con = m.getC().getConnection();
             PreparedStatement ps;
             try{
-                ps = con.prepareStatement("SELECT * FROM users WHERE uname = ? AND password = ?");
+                ps = con.prepareStatement("SELECT * FROM users WHERE uname = ? AND password = ? AND suspend = 0");
                 ps.setString(1, Username.getText());
                 ps.setString(2, String.valueOf(Password.getText().toString()));
 
                 ResultSet rs = ps.executeQuery();
                 if(rs.next()){
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+                    LocalDateTime now = LocalDateTime.now(); 
+                    ps = con.prepareStatement("UPDATE `users` SET `login` = ? WHERE `uname` = ?");
+                    ps.setString(1, dtf.format(now).toString());
+                    ps.setString(2, Username.getText());
+                    ps.execute();
+
                     //Role
                     String role = rs.getString(5);
                     //If user is admin -> admin dashboard
@@ -67,6 +78,14 @@ public class Login {
                         Admin acontroller = new Admin(Username.getText(), role);  
                         loader.setController(acontroller);
                         m.createScene(loader, "UOW dashboard (staff version)", 787, 675, 450, 50);
+                        m.getStage().setOnCloseRequest(event -> {
+                            try {
+                                acontroller.getLog(m);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            Platform.exit();    
+                        });
                     }
                     //User is student -> student dashboard
                     else{
@@ -74,6 +93,14 @@ public class Login {
                         Student scontroller = new Student(Username.getText(), role);  
                         loader.setController(scontroller);
                         m.createScene(loader, "UOW dashboard (student version)", 744, 544, 450, 50);
+                        m.getStage().setOnCloseRequest(event -> {
+                            try {
+                                scontroller.getLog(m);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            Platform.exit();    
+                        });
                     }
 
                 }else{

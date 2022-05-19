@@ -4,6 +4,9 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import com.mysql.cj.protocol.Resultset;
@@ -27,6 +30,7 @@ public class Admin implements Initializable{
     private String role;
     private int activeid;
     private String activename;
+    private Main m;
 
     //Constructor
     public Admin(){
@@ -123,6 +127,8 @@ public class Admin implements Initializable{
         Launchbutton.setDisable(true);
         Modifyroom.setDisable(true);
         CloseRoom.setDisable(true);
+
+        
     }
 
     /*
@@ -362,6 +368,16 @@ public class Admin implements Initializable{
         m.popup(loader, "Create room", 395, 584, 650, 150);
     }
 
+    public void getLog(Main m) throws SQLException{
+        Connection con = m.getC().getConnection();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+                    LocalDateTime now = LocalDateTime.now(); 
+                    ps = con.prepareStatement("UPDATE `users` SET `logout` = ? WHERE `uname` = ?");
+                    ps.setString(1, dtf.format(now).toString());
+                    ps.setString(2, username);
+                    ps.execute();
+    }
+    
     /*
     User log out:
         - Close dashboard
@@ -369,6 +385,7 @@ public class Admin implements Initializable{
     */
     public void logout() throws Exception{
         Main m = new Main();
+        getLog(m);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Login_form.fxml"));
         m.createScene(loader, "UOW room booking system", 600, 400, 450, 150);
     }

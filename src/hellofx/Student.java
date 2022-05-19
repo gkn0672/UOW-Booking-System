@@ -5,12 +5,14 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.mysql.cj.protocol.Resultset;
 
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -121,6 +123,7 @@ public class Student implements Initializable{
         Modifybutton.setDisable(true);
         Bookbutton.setDisable(true);
         Cancelbutton.setDisable(true);
+
     }
     
     public void updateBookingList(){
@@ -300,9 +303,20 @@ public class Student implements Initializable{
         stage.close();
     }
     
+    public void getLog(Main m) throws SQLException{
+        Connection con = m.getC().getConnection();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+                    LocalDateTime now = LocalDateTime.now(); 
+                    ps = con.prepareStatement("UPDATE `users` SET `logout` = ? WHERE `uname` = ?");
+                    ps.setString(1, dtf.format(now).toString());
+                    ps.setString(2, username);
+                    ps.execute();
+    }
+
     //Log out
-    public void Stulogout(ActionEvent event) throws IOException{
+    public void Stulogout(ActionEvent event) throws IOException, SQLException{
         Main m = new Main();
+        getLog(m);            
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Login_form.fxml"));
         m.createScene(loader, "UOW room booking system", 600, 400, 450, 150);
     }
