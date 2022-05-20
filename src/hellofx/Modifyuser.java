@@ -3,9 +3,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,12 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.input.KeyEvent;
-
 public class Modifyuser extends UserMng{
     ObservableList<String> Roletype = FXCollections.observableArrayList("Staff", "Student", "User Management");
     private Main m;
@@ -110,7 +103,7 @@ public class Modifyuser extends UserMng{
     public void initialize(URL arg0, ResourceBundle arg1){
         username.setText(user.getUname());
         password.setText(user.getPassword());
-        fname.setText(user.getPassword());
+        fname.setText(user.getFname());
         lname.setText(user.getLname());
         role.setValue(user.getRole());
         role.setItems(Roletype);

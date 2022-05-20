@@ -36,3 +36,6 @@ Create project file<br/>
 - Restrict time select<br/>
 - During data update, some element will be reset/disable to prevent crash<br/>
 
+## [1.2.3] - 2022-05-20
+- Final update, complete student, staff and user management dashboard.
+
