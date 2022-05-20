@@ -205,6 +205,13 @@ public class UserMng implements Initializable {
             ps.execute();
             ps = con.prepareStatement("SELECT * FROM `booking` WHERE `uname` = ? ");
             ps.setString(1,uName);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+                    LocalDateTime now = LocalDateTime.now(); 
+                    ps = con.prepareStatement("UPDATE `users` SET `logout` = ? WHERE `uname` = ?");
+                    ps.setString(1, dtf.format(now).toString());
+                    ps.setString(2, uName);
+                    ps.execute();
+            
             ResultSet rs = (ResultSet)ps.executeQuery();
             while(rs.next()){
                 String rid;
