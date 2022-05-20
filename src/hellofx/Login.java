@@ -88,7 +88,7 @@ public class Login {
                         });
                     }
                     //User is student -> student dashboard
-                    else{
+                    else if (role.equals("Student") == true){
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Dashboard_student.fxml"));
                         Student scontroller = new Student(Username.getText(), role);  
                         loader.setController(scontroller);
@@ -101,6 +101,21 @@ public class Login {
                             }
                             Platform.exit();    
                         });
+                    }
+                    else if (role.equals("User Management") == true){
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/UserMng.fxml"));
+                        UserMng ucontroller = new UserMng(Username.getText(), role);  
+                        loader.setController(ucontroller);
+                        m.createScene(loader, "UOW dashboard (User Management version)", 683, 534, 450, 50);
+                        m.getStage().setOnCloseRequest(event -> {
+                            try {
+                                ucontroller.getLog(m);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            Platform.exit();    
+                        });
+
                     }
 
                 }else{
