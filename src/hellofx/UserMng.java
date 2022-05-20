@@ -203,6 +203,21 @@ public class UserMng implements Initializable {
             ps.setInt(1,1);
             ps.setString(2,uName);
             ps.execute();
+            ps = con.prepareStatement("SELECT * FROM `booking` WHERE `uname` = ? ");
+            ps.setString(1,uName);
+            ResultSet rs = (ResultSet)ps.executeQuery();
+            while(rs.next()){
+                String rid;
+                rid = rs.getString("RID");
+                ps = con.prepareStatement("DELETE FROM `booking` WHERE `RID` = ?");
+                ps.setString(1,rid);
+                ps.execute();
+
+                ps = con.prepareStatement("UPDATE `room` SET status = ? WHERE ID = ?");
+                ps.setString(1,"Available");
+                ps.setString(2,rid);
+                ps.execute();
+            }
             updateUser();
             updateUserSuspend();
         }
