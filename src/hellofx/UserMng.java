@@ -3,11 +3,13 @@ package hellofx;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.mysql.cj.protocol.Resultset;
@@ -19,10 +21,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -102,26 +107,105 @@ public class UserMng implements Initializable {
 
     ObservableList<User> listU = FXCollections.observableArrayList();
     ObservableList<User> listS = FXCollections.observableArrayList();
-    Resultset rs = null;
+    ResultSet rs = null;
     PreparedStatement ps = null;
+    User user;
+    String uName;
 
     @FXML
-    void createuser(ActionEvent event) {
+    void createuser(ActionEvent event) throws Exception {
+        Main m = new Main();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Create_newuser_form.fxml"));
+        Createuser cu = new Createuser(this.username, this.role, m, this);
+        loader.setController(cu);
+        m.popup(loader, "Create New User", 395, 508, 650, 150);
+    }
+
+    @FXML
+    void deleteaccount(ActionEvent event) throws Exception{
+        Main m = new Main();
+        Connection con = m.getC().getConnection();
+
+        // create a alert
+        Alert a = new Alert(AlertType.CONFIRMATION);
+        a.setTitle("Delete Account");
+        a.setContentText("Are you sure delete " + uName + " account?");
+        Optional<ButtonType> result = a.showAndWait();
+
+        if(!result.isPresent( ) && result.get()  == ButtonType.CANCEL)
+        {
+           
+        }
+        else if(result.get() == ButtonType.OK)
+        {
+            ps = con.prepareStatement("DELETE FROM `users` WHERE `uname` = ?");
+            ps.setString(1,uName);
+            ps.execute();
+            updateUser();
+            updateUserSuspend();
+        }
+    }
+
+    @FXML
+    void modifyuseraccount(ActionEvent event) throws Exception {
+        Main m = new Main();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Layout/Modify_user.fxml"));
+        Modifyuser cu1 = new Modifyuser(this.username, this.role, m, this, user);
+        loader.setController(cu1);
+        m.popup(loader, "Modify User", 395, 508, 650, 150);
 
     }
 
     @FXML
-    void deleteaccount(ActionEvent event) {
+    void unban(ActionEvent event) throws Exception{
+        Main m = new Main();
+        Connection con = m.getC().getConnection();
 
+        // create a alert
+        Alert a = new Alert(AlertType.CONFIRMATION);
+        a.setTitle("Remove Suspend");
+        a.setContentText("Are you sure you want to remove suspension for " + uName);
+        Optional<ButtonType> result = a.showAndWait();
+
+        if(!result.isPresent( ) &&  result.get()  == ButtonType.CANCEL)
+        {
+           
+        }
+        else if(result.get() == ButtonType.OK)
+        {
+            ps = con.prepareStatement("UPDATE `users` SET suspend = ? WHERE `uname` = ?");
+            ps.setInt(1,0);
+            ps.setString(2,uName);
+            ps.execute();
+            updateUser();
+            updateUserSuspend();
+        }
     }
 
     @FXML
-    void modifyuseraccount(ActionEvent event) {
+    void suspendaccount(ActionEvent event) throws Exception {
+        Main m = new Main();
+        Connection con = m.getC().getConnection();
 
-    }
+        // create a alert
+        Alert a = new Alert(AlertType.CONFIRMATION);
+        a.setTitle("Suspend User");
+        a.setContentText("Are you sure you want to suspend " + uName);
+        Optional<ButtonType> result = a.showAndWait();
 
-    @FXML
-    void suspendaccount(ActionEvent event) {
+        if(!result.isPresent( ) &&  result.get()  == ButtonType.CANCEL)
+        {
+           
+        }
+        else if(result.get() == ButtonType.OK)
+        {
+            ps = con.prepareStatement("UPDATE `users` SET suspend = ? WHERE `uname` = ?");
+            ps.setInt(1,1);
+            ps.setString(2,uName);
+            ps.execute();
+            updateUser();
+            updateUserSuspend();
+        }
 
     }
 
@@ -130,11 +214,72 @@ public class UserMng implements Initializable {
        logout();
     }
 
-
+    @FXML
+    public void cancel(Button name) throws Exception{
+        Stage stage = (Stage) name.getScene().getWindow();
+        stage.close();
+    }
 
     @FXML
-    void viewhistorylog(ActionEvent event) {
+    void viewhistorylog(ActionEvent event) throws Exception{
+        Main m = new Main();
+        Connection con = m.getC().getConnection();
+        String logintime = null;
+        String logouttime = null;
+        String user = null;
 
+        // create a alert
+        Alert a = new Alert(AlertType.INFORMATION);
+        a.setTitle("Login Information ");
+
+        ps = con.prepareStatement("SELECT * FROM `users` WHERE uname = ?");
+        ps.setString(1,uName);
+        rs = (ResultSet) ps.executeQuery();
+
+        if(rs.next()){
+            logintime = rs.getString(7);
+            logouttime = rs.getString(8);
+            user = rs.getString(3);
+        }
+        a.setHeaderText("Login history for: " + user);
+        a.setContentText("Last login was: " + logintime + "\n" + "Last logout was: " + logouttime);
+        Optional<ButtonType> result = a.showAndWait();
+
+
+        if(!result.isPresent( ) &&  result.get()  == ButtonType.CANCEL)
+        {
+           
+        }
+        else if(result.get() == ButtonType.OK)
+        {
+
+        }
+    }
+
+    
+    @FXML
+    void getSelectedu(MouseEvent event) {
+        User userObject = userlist.getSelectionModel().getSelectedItem();
+        user = userObject;
+        uName = userObject.getUname();
+        modifyuser.setDisable(false);
+        suspend.setDisable(false);
+        deleteuser.setDisable(false);
+        historylog.setDisable(false);
+        removesuspend.setDisable(true);
+
+    }
+
+    @FXML
+    void getSelectedu1(MouseEvent event) {
+        User userObject = suspendlist.getSelectionModel().getSelectedItem();
+        user = userObject;
+        uName = userObject.getUname();
+        modifyuser.setDisable(false);
+        deleteuser.setDisable(false);
+        historylog.setDisable(false);
+        suspend.setDisable(true);
+        removesuspend.setDisable(false);
     }
 
     public void getLog(Main m) throws SQLException{

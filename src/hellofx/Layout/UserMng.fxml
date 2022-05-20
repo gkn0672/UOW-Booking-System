@@ -43,7 +43,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="userlist" layoutX="154.0" layoutY="24.0" prefHeight="174.0" prefWidth="376.0">
+            <TableView fx:id="userlist" layoutX="154.0" layoutY="24.0" onMouseClicked="#getSelectedu" prefHeight="174.0" prefWidth="376.0">
               <columns>
                 <TableColumn fx:id="uname" prefWidth="75.0" text="Username" />
                 <TableColumn fx:id="upassword" prefWidth="75.0" text="Password" />
@@ -62,7 +62,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TableView fx:id="suspendlist" layoutX="151.0" layoutY="274.0" prefHeight="119.0" prefWidth="376.0">
+            <TableView fx:id="suspendlist" layoutX="151.0" layoutY="274.0" onMouseClicked="#getSelectedu1" prefHeight="119.0" prefWidth="376.0">
                <columns>
                   <TableColumn fx:id="Suname" prefWidth="75.0" text="Username" />
                   <TableColumn fx:id="Supassword" prefWidth="75.0" text="Password" />
@@ -107,7 +107,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="removesuspend" layoutX="179.0" layoutY="398.0" mnemonicParsing="false" text="Remove suspend">
+            <Button fx:id="removesuspend" layoutX="179.0" layoutY="398.0" mnemonicParsing="false" onAction="#unban" text="Remove suspend">
                <graphic>
                   <ImageView fitHeight="37.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
